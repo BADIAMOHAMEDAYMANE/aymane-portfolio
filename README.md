@@ -46,6 +46,21 @@ data/                   # all editable content
 lib/utils.ts            # nav links, helpers
 public/projects/        # project screenshots
 ```
+<p align="left">
+  <a href="https://your-portfolio.vercel.app"><img alt="Live site" src="https://img.shields.io/badge/Live-Portfolio-2DD4BF?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+  <a href="https://www.linkedin.com/in/mohamed-aymane-badia-40a9712a1/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Mohamed%20Aymane%20Badia-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+  <a href="mailto:badiamohamedaymane@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+</p>
+
+<p align="left">
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
+  <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
+  <img alt="Vercel" src="https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
+  <img alt="Static" src="https://img.shields.io/badge/Rendering-Fully_static-2DD4BF?style=flat-square" />
+  <img alt="Last commit" src="https://img.shields.io/github/last-commit/BADIAMOHAMEDAYMANE/portfolio?style=flat-square&logo=github" />
+</p>
 
 ## Deploy on Vercel
 
