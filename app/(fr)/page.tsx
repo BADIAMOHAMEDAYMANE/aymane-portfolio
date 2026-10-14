@@ -8,6 +8,7 @@ import { Experience } from "@/components/sections/Experience";
 import { GitHub } from "@/components/sections/GitHub";
 import { Contact } from "@/components/sections/Contact";
 import { profile } from "@/data/profile";
+import { copy } from "@/data/i18n";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -28,19 +29,19 @@ export default function Home() {
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-accent-fg"
       >
-        Skip to content
+        {copy("fr").skipToContent}
       </a>
-      <Navbar />
+      <Navbar locale="fr" languageHref="/en" />
       <main id="main">
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <GitHub />
-        <Contact />
+        <Hero locale="fr" />
+        <About locale="fr" />
+        <Projects locale="fr" />
+        <Skills locale="fr" />
+        <Experience locale="fr" />
+        <GitHub locale="fr" />
+        <Contact locale="fr" />
       </main>
-      <Footer />
+      <Footer locale="fr" />
     </>
   );
 }

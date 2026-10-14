@@ -1,17 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { profile } from "@/data/profile";
-import "./globals.css";
+import "../globals.css";
 
 // Self-hosted variable fonts (SIL OFL) — no request to Google at runtime or build time.
 const inter = localFont({
-  src: "./fonts/Inter-Variable.woff2",
+  src: "../fonts/Inter-Variable.woff2",
   variable: "--font-inter",
   weight: "100 900",
   display: "swap",
 });
 const jetbrains = localFont({
-  src: "./fonts/JetBrainsMono-Variable.woff2",
+  src: "../fonts/JetBrainsMono-Variable.woff2",
   variable: "--font-jetbrains",
   weight: "100 800",
   display: "swap",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     "Portfolio",
     "Stage PFE",
   ],
-  ...(profile.siteUrl ? { alternates: { canonical: "/" } } : {}),
+  ...(profile.siteUrl ? { alternates: { canonical: "/", languages: { fr: "/", en: "/en" } } } : {}),
   openGraph: {
     type: "profile",
     ...(profile.siteUrl ? { url: profile.siteUrl } : {}),

@@ -1,18 +1,22 @@
 import { ArrowUpRight, Award, Briefcase, GraduationCap } from "lucide-react";
-import { certifications, education, experiences } from "@/data/experience";
+import { certifications } from "@/data/experience";
 import { cn } from "@/lib/utils";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
 import { Tag } from "../ui/Tag";
+import { copy, localizedEducation, localizedExperience, type Locale } from "@/data/i18n";
 
-export function Experience() {
+export function Experience({ locale }: { locale: Locale }) {
+  const text = copy(locale);
+  const experiences = localizedExperience(locale);
+  const education = localizedEducation(locale);
   return (
-    <Section id="experience" index="04" eyebrow="Expérience" title="Expérience & formation">
+    <Section id="experience" index="04" eyebrow={text.experience.eyebrow} title={text.experience.title}>
       <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
         {/* Experience timeline */}
         <div>
           <h3 className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-subtle">
-            <Briefcase className="size-3.5" /> Expérience
+            <Briefcase className="size-3.5" /> {text.experience.work}
           </h3>
           <ol className="space-y-6">
             {experiences.map((e) => (
@@ -53,7 +57,7 @@ export function Experience() {
                       href={e.caseStudy}
                       className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-fg"
                     >
-                      Étude de cas détaillée <ArrowUpRight className="size-4" aria-hidden="true" />
+                      {text.experience.caseStudy} <ArrowUpRight className="size-4" aria-hidden="true" />
                     </a>
                   )}
                 </li>
@@ -66,7 +70,7 @@ export function Experience() {
         <div className="space-y-10">
           <div>
             <h3 className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-subtle">
-              <GraduationCap className="size-3.5" /> Formation
+              <GraduationCap className="size-3.5" /> {text.experience.education}
             </h3>
             <ul className="space-y-4">
               {education.map((ed) => (
@@ -87,7 +91,7 @@ export function Experience() {
           {certifications.length > 0 && (
             <div>
               <h3 className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-subtle">
-                <Award className="size-3.5" /> Certifications
+                <Award className="size-3.5" /> {text.experience.certifications}
               </h3>
               <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
                 {certifications.map((c) => (

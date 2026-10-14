@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArrowUp, FileDown, Menu, Moon, Sun, X } from "lucide-react";
 import { navLinks, cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
+import { copy, type Locale } from "@/data/i18n";
 import { GithubIcon } from "./ui/BrandIcons";
 
 type Theme = "dark" | "light";
@@ -16,7 +17,8 @@ function subscribeTheme(cb: () => void) {
 const getTheme = (): Theme => (document.documentElement.dataset.theme === "light" ? "light" : "dark");
 const getServerTheme = (): Theme => "dark";
 
-export function Navbar() {
+export function Navbar({ locale, languageHref }: { locale: Locale; languageHref: string }) {
+  const text = copy(locale);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
@@ -69,7 +71,7 @@ export function Navbar() {
         scrolled || open ? "border-b border-border bg-bg/80 backdrop-blur-md" : "border-b border-transparent",
       )}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5 sm:px-8" aria-label="Navigation principale">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5 sm:px-8" aria-label={text.navigation.main}>
         <a href="#top" className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-sm font-semibold tracking-tight text-fg">
           <span className="grid size-7 place-items-center rounded-md border border-border-strong bg-surface font-mono text-[11px] text-accent">
             {profile.initials}
@@ -85,7 +87,7 @@ export function Navbar() {
                 aria-current={active === l.href ? "location" : undefined}
                 className={`whitespace-nowrap rounded-md px-2 py-2 text-[13px] transition-colors hover:text-fg ${active === l.href ? "text-accent" : "text-muted"}`}
               >
-                {l.label}
+                {text.navigation[l.key]}
               </a>
             </li>
           ))}
@@ -93,20 +95,28 @@ export function Navbar() {
 
         <div className="flex items-center gap-1">
           <a
-            href={profile.resume}
-            download="Mohamed-Aymane-Badia-CV-FR.pdf"
-            aria-label="Télécharger mon CV au format PDF"
+            href={locale === "en" ? "/cv-en.pdf" : profile.resume}
+            download={text.cvFile}
+            aria-label={text.cv}
             className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-sm text-accent transition-colors hover:bg-accent-soft hover:text-fg sm:px-3"
           >
             <FileDown className="size-4" aria-hidden="true" />
-            <span className="hidden xl:inline">Télécharger mon CV</span>
-            <span className="xl:hidden">CV PDF</span>
+            <span className="hidden xl:inline">{text.cv}</span>
+            <span className="xl:hidden">{text.cvShort}</span>
+          </a>
+          <a
+            href={languageHref}
+            lang={locale === "en" ? "fr" : "en"}
+            aria-label={text.switchTo}
+            className="grid h-9 min-w-9 shrink-0 place-items-center rounded-md px-2 font-mono text-xs font-semibold text-accent transition-colors hover:bg-accent-soft hover:text-fg"
+          >
+            {locale === "en" ? "FR" : "EN"}
           </a>
           <a
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Profil GitHub"
+            aria-label={text.githubProfile}
             className="grid size-9 shrink-0 place-items-center rounded-md text-muted transition-colors hover:text-fg"
           >
             <GithubIcon />
@@ -114,7 +124,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label={`Passer au thème ${theme === "dark" ? "clair" : "sombre"}`}
+            aria-label={`${locale === "en" ? "Switch to" : "Passer au thème"} ${theme === "dark" ? text.themeLight : text.themeDark}`}
             className="grid size-9 shrink-0 place-items-center rounded-md text-muted transition-colors hover:text-fg"
           >
             {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
@@ -122,7 +132,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-label={open ? text.closeMenu : text.openMenu}
             aria-expanded={open}
             aria-controls="mobile-menu"
             className="grid size-9 shrink-0 place-items-center rounded-md text-fg lg:hidden"
@@ -143,19 +153,19 @@ export function Navbar() {
                   aria-current={active === l.href ? "location" : undefined}
                   className={`flex items-center justify-between border-b border-border py-4 text-lg ${active === l.href ? "text-accent" : "text-fg"}`}
                 >
-                  {l.label}
+                  {text.navigation[l.key]}
                   <span className="font-mono text-xs text-subtle">{l.href.slice(1)}</span>
                 </a>
               </li>
             ))}
             <li>
               <a
-                href={profile.resume}
-                download="Mohamed-Aymane-Badia-CV-FR.pdf"
+                href={locale === "en" ? "/cv-en.pdf" : profile.resume}
+                download={text.cvFile}
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 py-5 text-lg text-accent"
               >
-                <FileDown className="size-5" aria-hidden="true" /> Télécharger mon CV
+                <FileDown className="size-5" aria-hidden="true" /> {text.cv}
               </a>
             </li>
           </ul>
@@ -168,7 +178,7 @@ export function Navbar() {
             top: 0,
             behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
           })}
-          aria-label="Retour en haut de page"
+          aria-label={text.backToTop}
           className="fixed right-5 bottom-5 z-40 grid size-11 place-items-center rounded-full border border-border-strong bg-surface text-fg shadow-lg transition-colors hover:border-accent hover:text-accent sm:right-8"
         >
           <ArrowUp className="size-4" aria-hidden="true" />

@@ -2,20 +2,22 @@ import { Brain, Code2, Database, Wrench } from "lucide-react";
 import { coreSkills, skillGroups } from "@/data/skills";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
+import { copy, localizedSkillGroup, type Locale } from "@/data/i18n";
 
 const icons = [Brain, Database, Code2, Wrench];
 
-export function Skills() {
+export function Skills({ locale }: { locale: Locale }) {
+  const text = copy(locale);
   return (
     <Section
       id="skills"
       index="03"
-      eyebrow="Compétences"
-      title="Compétences techniques"
-      intro="Une sélection de compétences mobilisées dans mes projets ; les autres outils utilisés sont regroupés ci-dessous."
+      eyebrow={text.skills.eyebrow}
+      title={text.skills.title}
+      intro={text.skills.intro}
     >
       <Reveal className="mb-8 rounded-xl border border-border bg-surface p-6 sm:p-7">
-        <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-accent">Compétences cœur</h3>
+        <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-accent">{text.skills.core}</h3>
         <ul className="flex flex-wrap gap-2">
           {coreSkills.map((skill) => (
             <li key={skill} className="rounded-md border border-border-strong bg-bg px-3 py-2 text-sm font-medium text-fg">
@@ -25,7 +27,8 @@ export function Skills() {
         </ul>
       </Reveal>
       <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
-        {skillGroups.map((g, i) => {
+        {skillGroups.map((_, i) => {
+          const g = localizedSkillGroup(locale, i);
           const Icon = icons[i % icons.length];
           return (
             <Reveal key={g.title} delay={i * 0.05} className="bg-surface p-6 sm:p-7">

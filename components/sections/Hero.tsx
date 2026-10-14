@@ -4,10 +4,12 @@ import { profile } from "@/data/profile";
 import { ButtonLink } from "../ui/ButtonLink";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons";
 import { NeuralNet } from "../NeuralNet";
+import { copy, localizedProfile, type Locale } from "@/data/i18n";
 
-const focus = ["Machine Learning", "Deep Learning", "NLP", "LLM fine-tuning", "Computer Vision"];
-
-export function Hero() {
+export function Hero({ locale }: { locale: Locale }) {
+  const text = copy(locale);
+  const localized = localizedProfile(locale);
+  const resume = locale === "en" ? "/cv-en.pdf" : profile.resume;
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="bg-grid pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
@@ -18,18 +20,18 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:hidden" />
               <span className="relative inline-flex size-2 rounded-full bg-accent" />
             </span>
-            {profile.status}
+            {localized.status}
           </p>
 
           <h1 className="text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-[3.4rem] lg:leading-[1.05]">
             {profile.name}
           </h1>
-          <p className="mt-3 font-mono text-sm text-accent sm:text-base">{profile.role} · LLM fine-tuning · Document AI · Deep Learning</p>
+          <p className="mt-3 font-mono text-sm text-accent sm:text-base">{localized.role} · LLM fine-tuning · Document AI · Deep Learning</p>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{profile.tagline}</p>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{localized.tagline}</p>
 
           <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-subtle">
-            {focus.map((f) => (
+            {text.hero.focus.map((f) => (
               <li key={f} className="before:mr-2 before:text-accent before:content-['▹']">
                 {f}
               </li>
@@ -38,10 +40,10 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <ButtonLink href="#projects" variant="primary">
-              Voir les projets <ArrowDown className="size-4" />
+              {text.hero.projects} <ArrowDown className="size-4" />
             </ButtonLink>
-            <ButtonLink href={profile.resume} download="Mohamed-Aymane-Badia-CV-FR.pdf" variant="secondary">
-              <FileDown className="size-4" /> Télécharger mon CV
+            <ButtonLink href={resume} download={text.cvFile} variant="secondary">
+              <FileDown className="size-4" /> {text.cv}
             </ButtonLink>
             <ButtonLink href={profile.github} external>
               <GithubIcon /> GitHub
@@ -50,15 +52,15 @@ export function Hero() {
               <LinkedinIcon /> LinkedIn
             </ButtonLink>
             <ButtonLink href="#contact" variant="ghost">
-              <Mail className="size-4" /> Contact
+              <Mail className="size-4" /> {text.hero.contact}
             </ButtonLink>
           </div>
           <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              { value: "100 %", label: "JSON valide · 60/60 sorties" },
-              { value: "87 %", label: "Champs corrects sur CORD" },
-              { value: "6/6", label: "Rôles testés" },
-              { value: "~0,94", label: "Rappel · scans propres" },
+              { value: "100 %", label: text.hero.stats[0] },
+              { value: "87 %", label: text.hero.stats[1] },
+              { value: "6/6", label: text.hero.stats[2] },
+              { value: locale === "en" ? "~0.94" : "~0,94", label: text.hero.stats[3] },
             ].map((stat) => (
               <div key={stat.label} className="rounded-lg border border-border bg-surface/80 px-3 py-3">
                 <dd className="font-mono text-xl text-fg">{stat.value}</dd>
@@ -78,7 +80,7 @@ export function Hero() {
               <NeuralNet className="hidden h-auto w-1/2 lg:block" />
               <Image
                 src="/aymane-badia.png"
-                alt="Portrait de Mohamed Aymane Badia"
+                alt={text.hero.portrait}
                 width={768}
                 height={1024}
                 className="h-auto w-full max-w-xs rounded-xl object-cover object-center ring-1 ring-border-strong lg:w-1/2 lg:max-w-none"

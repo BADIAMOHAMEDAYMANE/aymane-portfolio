@@ -5,7 +5,8 @@ export const alt = `${profile.name} — Élève-ingénieur IA & Data Science, re
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const isEnglish = new URL(request.url).searchParams.get("locale") === "en";
   const tags = ["Machine Learning", "Deep Learning", "NLP", "PyTorch"];
   return new ImageResponse(
     (
@@ -24,11 +25,13 @@ export async function GET() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14, color: "#2dd4bf", fontSize: 26 }}>
           <div style={{ width: 14, height: 14, borderRadius: 7, background: "#2dd4bf" }} />
-          Recherche un stage PFE de 6 mois
+          {isEnglish ? "Seeking a 6-month PFE internship" : "Recherche un stage PFE de 6 mois"}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 76, fontWeight: 700, letterSpacing: -2 }}>{profile.name}</div>
-          <div style={{ fontSize: 38, color: "#b4b4bc" }}>Élève-ingénieur IA &amp; Data Science</div>
+          <div style={{ fontSize: 38, color: "#b4b4bc" }}>
+            {isEnglish ? "AI & Data Science Engineering Student" : "Élève-ingénieur IA & Data Science"}
+          </div>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
           {tags.map((tag) => (

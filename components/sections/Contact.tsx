@@ -4,8 +4,11 @@ import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons";
 import { ButtonLink } from "../ui/ButtonLink";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
+import { copy, localizedProfile, type Locale } from "@/data/i18n";
 
-export function Contact() {
+export function Contact({ locale }: { locale: Locale }) {
+  const text = copy(locale);
+  const localized = localizedProfile(locale);
   const channels = [
     { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: <Mail className="size-4" />, external: false },
     { label: "LinkedIn", value: "mohamed-aymane-badia", href: profile.linkedin, icon: <LinkedinIcon />, external: true },
@@ -16,25 +19,25 @@ export function Contact() {
     <Section
       id="contact"
       index="06"
-      eyebrow="Contact"
-      title="Échangeons"
-      intro="Je recherche un stage PFE de six mois en IA, Machine Learning ou Data Science. Le PFA de 8 semaines chez Lama Healthcare est une expérience antérieure, distincte de cette recherche."
+      eyebrow={text.contact.eyebrow}
+      title={text.contact.title}
+      intro={text.contact.intro}
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] [&>*]:min-w-0">
         <Reveal className="flex flex-col justify-between gap-8 rounded-xl border border-border bg-surface p-6 sm:p-8">
           <p className="text-lg leading-relaxed text-fg">
-            Pour parler d’un stage ou d’un projet, contactez-moi par email ou sur LinkedIn.
+            {text.contact.message}
           </p>
           <div className="flex flex-wrap gap-3">
             <ButtonLink href={`mailto:${profile.email}`} variant="primary">
-              <Mail className="size-4" /> Envoyer un email
+              <Mail className="size-4" /> {text.contact.sendEmail}
             </ButtonLink>
-            <ButtonLink href={profile.resume} download="Mohamed-Aymane-Badia-CV-FR.pdf">
-              <FileText className="size-4" /> Télécharger mon CV
+            <ButtonLink href={locale === "en" ? "/cv-en.pdf" : profile.resume} download={text.cvFile}>
+              <FileText className="size-4" /> {text.cv}
             </ButtonLink>
             {(profile.location || profile.lookingFor.start || profile.lookingFor.mobility) && (
               <p className="w-full text-sm text-muted">
-                {[profile.location, profile.lookingFor.start && `Disponible à partir de ${profile.lookingFor.start}`, profile.lookingFor.mobility && `Mobilité : ${profile.lookingFor.mobility}`].filter(Boolean).join(" · ")}
+                {[localized.location, localized.start && `${text.contact.start} ${localized.start}`, localized.mobility && `${text.contact.mobility}: ${localized.mobility}`].filter(Boolean).join(" · ")}
               </p>
             )}
           </div>

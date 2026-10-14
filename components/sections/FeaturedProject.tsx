@@ -5,8 +5,10 @@ import { GithubIcon } from "../ui/BrandIcons";
 import { ButtonLink } from "../ui/ButtonLink";
 import { Reveal } from "../ui/Reveal";
 import { Tag } from "../ui/Tag";
+import { copy, type Locale } from "@/data/i18n";
 
-export function FeaturedProject({ project: p }: { project: FeaturedProjectType }) {
+export function FeaturedProject({ project: p, locale }: { project: FeaturedProjectType; locale: Locale }) {
+  const text = copy(locale);
   return (
     <Reveal>
       <article className="overflow-hidden rounded-2xl border border-border-strong bg-surface">
@@ -16,7 +18,7 @@ export function FeaturedProject({ project: p }: { project: FeaturedProjectType }
             <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-accent-soft px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-accent">
               {p.label}
             </p>
-            {p.codePrivate && <span className="mb-3 ml-2 inline-flex rounded-full border border-border-strong px-2.5 py-1 font-mono text-[11px] text-muted">Code privé</span>}
+            {p.codePrivate && <span className="mb-3 ml-2 inline-flex rounded-full border border-border-strong px-2.5 py-1 font-mono text-[11px] text-muted">{text.featured.privateCode}</span>}
             <h3 className="text-2xl font-semibold tracking-tight text-fg sm:text-3xl">{p.title}</h3>
             {p.context && (
               <p className="mt-2 flex items-start gap-2 font-mono text-xs text-subtle">
@@ -27,8 +29,8 @@ export function FeaturedProject({ project: p }: { project: FeaturedProjectType }
             <p className="mt-3 text-base text-muted">{p.tagline}</p>
           </div>
           {p.github && (
-            <ButtonLink href={p.github} external className="shrink-0 self-start lg:self-auto" aria-label={`Voir le code public de ${p.title}`}>
-              <GithubIcon /> Voir le code
+            <ButtonLink href={p.github} external className="shrink-0 self-start lg:self-auto" aria-label={`${text.featured.viewCode} ${p.title}`}>
+              <GithubIcon /> {text.featured.code}
             </ButtonLink>
           )}
         </div>
@@ -65,15 +67,15 @@ export function FeaturedProject({ project: p }: { project: FeaturedProjectType }
           {/* Problem / solution / contributions */}
           <div className="space-y-7 border-b border-border p-6 sm:p-8 lg:border-r lg:border-b-0">
             <div>
-              <h4 className="mb-2 font-mono text-[11px] uppercase tracking-wider text-accent">Problème</h4>
+              <h4 className="mb-2 font-mono text-[11px] uppercase tracking-wider text-accent">{text.featured.problem}</h4>
               <p className="text-[15px] leading-relaxed text-muted">{p.problem}</p>
             </div>
             <div>
-              <h4 className="mb-2 font-mono text-[11px] uppercase tracking-wider text-accent">Approche</h4>
+              <h4 className="mb-2 font-mono text-[11px] uppercase tracking-wider text-accent">{text.featured.approach}</h4>
               <p className="text-[15px] leading-relaxed text-muted">{p.solution}</p>
             </div>
             <div>
-              <h4 className="mb-3 font-mono text-[11px] uppercase tracking-wider text-accent">Ma contribution</h4>
+              <h4 className="mb-3 font-mono text-[11px] uppercase tracking-wider text-accent">{text.featured.contribution}</h4>
               <ul className="space-y-2.5">
                 {p.contributions.map((c) => (
                   <li key={c} className="flex gap-3 text-sm leading-relaxed text-muted">
@@ -87,7 +89,7 @@ export function FeaturedProject({ project: p }: { project: FeaturedProjectType }
 
           {/* Architecture */}
           <div className="p-6 sm:p-8">
-            <h4 className="mb-5 font-mono text-[11px] uppercase tracking-wider text-accent">Architecture</h4>
+            <h4 className="mb-5 font-mono text-[11px] uppercase tracking-wider text-accent">{text.featured.architecture}</h4>
             <ol className="relative space-y-1">
               {p.architecture.map((a, i) => (
                 <li key={a.step} className="relative flex gap-4 pb-4 last:pb-0">
@@ -106,7 +108,7 @@ export function FeaturedProject({ project: p }: { project: FeaturedProjectType }
             </ol>
 
             <div className="mt-8 border-t border-border pt-6">
-              <h4 className="mb-3 font-mono text-[11px] uppercase tracking-wider text-accent">Technologies</h4>
+              <h4 className="mb-3 font-mono text-[11px] uppercase tracking-wider text-accent">{text.featured.technologies}</h4>
               <ul className="flex flex-wrap gap-1.5">
                 {p.stack.map((s) => (
                   <li key={s}>

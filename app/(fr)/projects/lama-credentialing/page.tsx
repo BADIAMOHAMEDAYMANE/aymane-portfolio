@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   title: "Credentialing & Document AI · Étude de cas",
   description:
     "Étude de cas du PFA chez Lama Healthcare : plateforme de credentialing, pipeline Document AI et évaluation réalisée sur le dataset public CORD.",
+  ...(profile.siteUrl ? {
+    alternates: {
+      canonical: "/projects/lama-credentialing",
+      languages: {
+        fr: "/projects/lama-credentialing",
+        en: "/en/projects/lama-credentialing",
+      },
+    },
+    openGraph: { url: `${profile.siteUrl}/projects/lama-credentialing` },
+  } : {}),
 };
 
 const architecture = [
@@ -25,6 +35,9 @@ export default function LamaCredentialingCaseStudy() {
       <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 sm:py-24">
         <Link href="/#projects" className="inline-flex items-center gap-2 text-sm text-muted hover:text-fg">
           <ArrowLeft className="size-4" aria-hidden="true" /> Retour aux projets
+        </Link>
+        <Link href="/en/projects/lama-credentialing" lang="en" className="ml-6 font-mono text-xs text-accent hover:text-fg">
+          EN
         </Link>
 
         <header className="mt-10 border-b border-border pb-10">

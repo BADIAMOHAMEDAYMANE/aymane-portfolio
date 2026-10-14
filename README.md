@@ -1,6 +1,6 @@
 # Mohamed Aymane Badia — Portfolio
 
-Personal portfolio (AI & Data Science) built with **Next.js 16 (App Router)**, **TypeScript** and **Tailwind CSS v4**. Fully static, deployed on **Vercel**.
+Personal portfolio (AI & Data Science) built with **Next.js 16 (App Router)**, **TypeScript** and **Tailwind CSS v4**. French is the default at `/`; the English version is available at `/en`. Deployed on **Vercel**.
 
 ## Quick start
 
@@ -22,28 +22,31 @@ All content lives in `data/` — no need to touch components.
 | `data/projects.ts` | Featured project + project cards + other repos |
 | `data/skills.ts` | Skill groups |
 | `data/experience.ts` | Experience, education and certifications |
+| `data/i18n.ts` | English/French interface and portfolio content |
 
 Personal details that have not been confirmed are represented as `null` or empty arrays in the data files and are not rendered on the site. Complete them with verified information before publishing.
 
-**CV:** the available French PDF is served at `/cv-fr.pdf`. Add an English version only after receiving the final document.
+**CV:** French PDF at `/cv-fr.pdf`; English PDF at `/cv-en.pdf`.
 **Project images:** add a `.webp` in `public/projects/` and reference it from the project's `images` array only after confirming publication rights and removing confidential information.
 
 ## Structure
 
 ```
 app/
-  layout.tsx            # fonts, global metadata (SEO / Open Graph), theme script
-  page.tsx              # section composition + JSON-LD
-  opengraph-image.tsx   # generated 1200×630 LinkedIn/Twitter preview
+  (fr)/                 # French root layout and default home route (/)
+  en/                   # English root layout and routes (/en, /en/projects/...)
+  api/og/route.tsx       # generated 1200×630 localized social preview
   icon.svg              # favicon
   robots.ts, sitemap.ts
   fonts/                # self-hosted Inter & JetBrains Mono (variable)
-  projects/lama-credentialing/ # detailed PFA case study
+  (fr)/projects/...     # French PFA case study
+  en/projects/...       # English PFA case study
 components/
   Navbar.tsx, Footer.tsx, ProjectCard.tsx, NeuralNet.tsx
   sections/             # Hero, About, Projects, FeaturedProject, Skills, Experience, GitHub, Contact
   ui/                   # Section, Reveal, Tag, ButtonLink, BrandIcons
 data/                   # all editable content
+  i18n.ts               # localized copy and translations
 lib/utils.ts            # nav links, helpers
 public/projects/        # project screenshots
 ```

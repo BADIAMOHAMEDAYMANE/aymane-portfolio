@@ -5,10 +5,12 @@ import { GithubIcon } from "../ui/BrandIcons";
 import { ButtonLink } from "../ui/ButtonLink";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
+import { copy, type Locale } from "@/data/i18n";
 
 const repoName = (url: string) => url.split("/").pop() ?? url;
 
-export function GitHub() {
+export function GitHub({ locale }: { locale: Locale }) {
+  const text = copy(locale);
   const repos = [
     ...[...featuredProjects, ...projects]
       .filter((p): p is typeof p & { github: string } => !!p.github)
@@ -19,9 +21,9 @@ export function GitHub() {
     <Section
       id="github"
       index="05"
-      eyebrow="GitHub"
-      title="Dépôts & projets"
-      intro="Consulte les dépôts associés aux projets dont le code est disponible. Le code du projet réalisé chez Lama Healthcare reste privé."
+      eyebrow={text.github.eyebrow}
+      title={text.github.title}
+      intro={text.github.intro}
     >
       <Reveal>
         <div className="overflow-hidden rounded-xl border border-border bg-surface">
@@ -36,7 +38,7 @@ export function GitHub() {
               </div>
             </div>
             <ButtonLink href={`${profile.github}?tab=repositories`} external variant="primary" size="sm">
-              All repositories <ArrowUpRight className="size-3.5" />
+              {text.github.allRepos} <ArrowUpRight className="size-3.5" />
             </ButtonLink>
           </div>
           <ul className="divide-y divide-border">

@@ -4,15 +4,17 @@ import type { Project, ProjectCategory } from "@/data/projects";
 import { GithubIcon } from "./ui/BrandIcons";
 import { ButtonLink } from "./ui/ButtonLink";
 import { Tag } from "./ui/Tag";
+import { copy, type Locale } from "@/data/i18n";
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({ project, locale }: { project: Project; locale: Locale }) {
+  const text = copy(locale);
   const { title, tagline, problem, solution, stack, results, github, demo, images, categories, note } = project;
   const categoryLabels: Record<ProjectCategory, string> = {
-    "AI / ML": "IA / ML",
-    "Deep Learning": "Deep Learning",
-    NLP: "NLP",
-    "Full-Stack": "Full-stack",
-    "Computer Vision": "Computer Vision",
+    "AI / ML": text.projects.categories["AI / ML"],
+    "Deep Learning": text.projects.categories["Deep Learning"],
+    NLP: text.projects.categories.NLP,
+    "Full-Stack": text.projects.categories["Full-Stack"],
+    "Computer Vision": text.projects.categories["Computer Vision"],
   };
 
   return (
@@ -40,11 +42,11 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <dl className="mt-5 space-y-3 text-sm leading-relaxed">
           <div>
-            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">Problème</dt>
+            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">{text.projects.problem}</dt>
             <dd className="text-muted">{problem}</dd>
           </div>
           <div>
-            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">Approche</dt>
+            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">{text.projects.approach}</dt>
             <dd className="text-muted">{solution}</dd>
           </div>
         </dl>
@@ -63,7 +65,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         )}
 
-        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Technologies">
+        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label={text.projects.technologies}>
           {stack.map((s) => (
             <li key={s}>
               <Tag>{s}</Tag>
@@ -73,24 +75,24 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {note && (
           <p className="mt-4 flex items-start gap-2 rounded-md border border-dashed border-border-strong px-3 py-2 text-xs text-subtle">
-            <Info className="mt-px size-3.5 shrink-0" /> {note}
+            <Info className="mt-px size-3.5 shrink-0" aria-hidden="true" /> {note}
           </p>
         )}
 
         <div className="mt-auto flex flex-wrap gap-2 pt-6">
           {github && (
-            <ButtonLink href={github} external size="sm" aria-label={`${title} on GitHub`}>
-              <GithubIcon className="size-3.5" /> Code
+            <ButtonLink href={github} external size="sm" aria-label={`${title} · ${text.projects.code} on GitHub`}>
+            <GithubIcon className="size-3.5" /> {text.projects.code}
             </ButtonLink>
           )}
           {demo && (
-            <ButtonLink href={demo} external size="sm" variant="primary" aria-label={`Démo en direct : ${title}`}>
-            Démo en direct <ArrowUpRight className="size-3.5" />
+            <ButtonLink href={demo} external size="sm" variant="primary" aria-label={`${text.projects.demoLabel}${title}`}>
+            {text.projects.liveDemo} <ArrowUpRight className="size-3.5" />
             </ButtonLink>
           )}
           {project.codePrivate && (
             <span className="inline-flex h-8 items-center rounded-lg border border-border px-3 text-[13px] text-muted">
-              Code privé
+              {text.projects.privateCode}
             </span>
           )}
         </div>

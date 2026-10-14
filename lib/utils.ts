@@ -3,9 +3,9 @@ export function cn(...classes: (string | false | null | undefined)[]) {
 }
 
 export const navLinks = [
-  { href: "#about", label: "À propos" },
-  { href: "#projects", label: "Projets" },
-  { href: "#skills", label: "Compétences" },
-  { href: "#experience", label: "Expérience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", key: "about" },
+  { href: "#projects", key: "projects" },
+  { href: "#skills", key: "skills" },
+  { href: "#experience", key: "experience" },
+  { href: "#contact", key: "contact" },
 ] as const;
