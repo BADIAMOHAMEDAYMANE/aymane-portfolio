@@ -11,7 +11,7 @@ export const profile = {
   tagline:
     "LLM fine-tuning · Document AI · Deep Learning — de l'expérimentation à des applications utilisables.",
   status: "Recherche un stage PFE de 6 mois en IA / Machine Learning / Data Science",
-  location: null as string | null,
+  location: "Marrakech, Maroc",
   languages: [
     { name: "Français", level: "B2" },
     { name: "Anglais", level: "B1" },
@@ -24,7 +24,7 @@ export const profile = {
   lookingFor: {
     duration: "6 mois",
     topics: ["LLM / NLP", "Computer Vision", "Document AI", "MLOps"],
-    start: null as string | null,
+    start: "Février 2027",
     mobility: "Présentiel ou à distance",
   },
   // Prefer the custom domain; Vercel's deployment hostname is a safe fallback.

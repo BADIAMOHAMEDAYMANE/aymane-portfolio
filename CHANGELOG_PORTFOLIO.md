@@ -19,6 +19,7 @@ Audit et améliorations du 14 octobre 2026.
 - Ajout du bloc « Ce que je cherche » avec sujets de mission.
 - Français défini comme langue par défaut du document. Niveaux fournis : français B2, anglais B1. Un sélecteur FR/EN et les contenus anglais traduits restent à intégrer ; le niveau d'arabe n'est pas renseigné.
 - Mobilité mise à jour : présentiel ou à distance.
+- Lieu et disponibilité ajoutés : Marrakech, Maroc ; début souhaité en février 2027.
 
 ## P2 — Projets
 
@@ -56,7 +57,7 @@ Audit et améliorations du 14 octobre 2026.
 
 ## À compléter par moi
 
-- `data/profile.ts` — `location`, `lookingFor.start` : ville/pays et date de début souhaitée.
+- `data/profile.ts` — lieu et date de début renseignés : Marrakech, Maroc ; février 2027.
 - `data/profile.ts` — `languages` : niveau d'arabe, s'il doit être affiché. Les niveaux français B2 et anglais B1 sont renseignés. Fournir aussi les textes anglais avant d'ajouter le sélecteur FR/EN.
 - `data/experience.ts` — dates exactes et lieu du PFA Lama ; année exacte de début et modules clés de formation.
 - `public/` et `data/profile.ts` — CV anglais final, si disponible.
