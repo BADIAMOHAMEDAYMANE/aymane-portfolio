@@ -1,12 +1,19 @@
 import Image from "next/image";
 import { ArrowUpRight, Info } from "lucide-react";
-import type { Project } from "@/data/projects";
+import type { Project, ProjectCategory } from "@/data/projects";
 import { GithubIcon } from "./ui/BrandIcons";
 import { ButtonLink } from "./ui/ButtonLink";
 import { Tag } from "./ui/Tag";
 
 export function ProjectCard({ project }: { project: Project }) {
   const { title, tagline, problem, solution, stack, results, github, demo, images, categories, note } = project;
+  const categoryLabels: Record<ProjectCategory, string> = {
+    "AI / ML": "IA / ML",
+    "Deep Learning": "Deep Learning",
+    NLP: "NLP",
+    "Full-Stack": "Full-stack",
+    "Computer Vision": "Computer Vision",
+  };
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-colors duration-300 hover:border-border-strong">
@@ -27,29 +34,32 @@ export function ProjectCard({ project }: { project: Project }) {
       )}
 
       <div className="flex flex-1 flex-col p-6">
-        <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-subtle">{categories.join(" · ")}</p>
+        <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-muted">{categories.map((category) => categoryLabels[category] ?? category).join(" · ")}</p>
         <h3 className="text-lg font-semibold tracking-tight text-fg">{title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted">{tagline}</p>
 
         <dl className="mt-5 space-y-3 text-sm leading-relaxed">
           <div>
-            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">Problem</dt>
+            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">Problème</dt>
             <dd className="text-muted">{problem}</dd>
           </div>
           <div>
-            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">Solution</dt>
+            <dt className="mb-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">Approche</dt>
             <dd className="text-muted">{solution}</dd>
           </div>
         </dl>
 
         {results.length > 0 && (
-          <div className="mt-5 flex flex-wrap gap-6 border-t border-border pt-5">
-            {results.map((r) => (
-              <div key={r.label}>
-                <p className="font-mono text-xl font-medium text-fg">{r.value}</p>
-                <p className="text-xs text-subtle">{r.label}</p>
-              </div>
-            ))}
+          <div className="mt-5 border-t border-border pt-5">
+            <div className="flex flex-wrap gap-6">
+              {results.map((r) => (
+                <div key={r.label}>
+                  <p className="font-mono text-xl font-medium text-fg">{r.value}</p>
+                  <p className="text-xs text-muted">{r.label}</p>
+                </div>
+              ))}
+            </div>
+            {project.resultContext && <p className="mt-3 text-xs leading-relaxed text-muted">{project.resultContext}</p>}
           </div>
         )}
 
@@ -74,9 +84,14 @@ export function ProjectCard({ project }: { project: Project }) {
             </ButtonLink>
           )}
           {demo && (
-            <ButtonLink href={demo} external size="sm" variant="primary" aria-label={`${title} live demo`}>
-              Live Demo <ArrowUpRight className="size-3.5" />
+            <ButtonLink href={demo} external size="sm" variant="primary" aria-label={`Démo en direct : ${title}`}>
+            Démo en direct <ArrowUpRight className="size-3.5" />
             </ButtonLink>
+          )}
+          {project.codePrivate && (
+            <span className="inline-flex h-8 items-center rounded-lg border border-border px-3 text-[13px] text-muted">
+              Code privé
+            </span>
           )}
         </div>
       </div>

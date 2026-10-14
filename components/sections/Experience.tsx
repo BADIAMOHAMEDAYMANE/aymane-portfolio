@@ -1,40 +1,30 @@
-import { Award, Briefcase, GraduationCap } from "lucide-react";
+import { ArrowUpRight, Award, Briefcase, GraduationCap } from "lucide-react";
 import { certifications, education, experiences } from "@/data/experience";
 import { cn } from "@/lib/utils";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
 import { Tag } from "../ui/Tag";
 
-function PlaceholderBadge() {
-  return (
-    <span className="ml-2 rounded border border-dashed border-amber-500/50 px-1.5 py-0.5 font-mono text-[10px] text-amber-500">
-      TO COMPLETE
-    </span>
-  );
-}
-
 export function Experience() {
   return (
-    <Section id="experience" index="04" eyebrow="Experience" title="Experience & education">
+    <Section id="experience" index="04" eyebrow="Expérience" title="Expérience & formation">
       <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
         {/* Experience timeline */}
         <div>
           <h3 className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-subtle">
-            <Briefcase className="size-3.5" /> Experience
+            <Briefcase className="size-3.5" /> Expérience
           </h3>
           <ol className="space-y-6">
             {experiences.map((e) => (
               <Reveal key={e.company + e.period}>
                 <li
                   className={cn(
-                    "rounded-xl border bg-surface p-6",
-                    e.placeholder ? "border-dashed border-border-strong" : "border-border",
+                    "rounded-xl border border-border bg-surface p-6",
                   )}
                 >
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                     <h4 className="text-base font-semibold text-fg">
                       {e.role}
-                      {e.placeholder && <PlaceholderBadge />}
                     </h4>
                     <p className="font-mono text-xs text-subtle">{e.period}</p>
                   </div>
@@ -58,6 +48,14 @@ export function Experience() {
                       </li>
                     ))}
                   </ul>
+                  {e.caseStudy && (
+                    <a
+                      href={e.caseStudy}
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-fg"
+                    >
+                      Étude de cas détaillée <ArrowUpRight className="size-4" aria-hidden="true" />
+                    </a>
+                  )}
                 </li>
               </Reveal>
             ))}
@@ -68,7 +66,7 @@ export function Experience() {
         <div className="space-y-10">
           <div>
             <h3 className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-subtle">
-              <GraduationCap className="size-3.5" /> Education
+              <GraduationCap className="size-3.5" /> Formation
             </h3>
             <ul className="space-y-4">
               {education.map((ed) => (
@@ -77,7 +75,6 @@ export function Experience() {
                     <h4 className="text-base font-semibold leading-snug text-fg">{ed.degree}</h4>
                     <p className="mt-1 text-sm text-accent">
                       {ed.school}
-                      {ed.placeholder && <PlaceholderBadge />}
                     </p>
                     <p className="mt-1 font-mono text-xs text-subtle">{ed.period}</p>
                     {ed.details && <p className="mt-3 text-sm leading-relaxed text-muted">{ed.details}</p>}

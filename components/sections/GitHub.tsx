@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
-import { featuredProjects, otherRepos, projects } from "@/data/projects";
+import { featuredProjects, projects } from "@/data/projects";
 import { GithubIcon } from "../ui/BrandIcons";
 import { ButtonLink } from "../ui/ButtonLink";
 import { Reveal } from "../ui/Reveal";
@@ -13,7 +13,6 @@ export function GitHub() {
     ...[...featuredProjects, ...projects]
       .filter((p): p is typeof p & { github: string } => !!p.github)
       .map((p) => ({ name: repoName(p.github), description: p.tagline, stack: p.stack.slice(0, 3), url: p.github })),
-    ...otherRepos,
   ];
 
   return (
@@ -21,8 +20,8 @@ export function GitHub() {
       id="github"
       index="05"
       eyebrow="GitHub"
-      title="Code is public"
-      intro="All my personal projects are open source. Browse the repositories to see the code, notebooks and documentation."
+      title="Dépôts & projets"
+      intro="Consulte les dépôts associés aux projets dont le code est disponible. Le code du projet réalisé chez Lama Healthcare reste privé."
     >
       <Reveal>
         <div className="overflow-hidden rounded-xl border border-border bg-surface">

@@ -3,7 +3,7 @@
  * README, notebook outputs or the PFA defence slides — never invented.
  */
 
-export type ProjectCategory = "AI / ML" | "Deep Learning" | "NLP" | "Full-Stack";
+export type ProjectCategory = "AI / ML" | "Deep Learning" | "NLP" | "Full-Stack" | "Computer Vision";
 
 export type Project = {
   slug: string;
@@ -17,12 +17,14 @@ export type Project = {
   results: { value: string; label: string }[];
   /** Omit for private / company projects. */
   github?: string;
+  codePrivate?: boolean;
   demo?: string;
   /** For company / internship projects. */
   context?: string;
   images?: { src: string; alt: string }[];
   /** Shown as a small notice when something needs your attention. */
   note?: string;
+  resultContext?: string;
 };
 
 const GH = "https://github.com/BADIAMOHAMEDAYMANE";
@@ -33,31 +35,31 @@ export type FeaturedProject = Project & {
   contributions: string[];
 };
 
-const lamaHealthcare: FeaturedProject = {
+export const lamaHealthcare: FeaturedProject = {
   slug: "lama-healthcare",
-  label: "Featured · Industry project",
-  title: "HIPAA-Compliant Credentialing Platform with AI Document Extraction",
-  context: "Lama Healthcare — Practice One · Final-year internship (PFA) · team of 3 · 8 weeks",
+  label: "Projet en entreprise · PFA",
+  title: "Plateforme de credentialing et extraction documentaire par IA",
+  context: "Lama Healthcare — Practice One · PFA (8 semaines) · équipe de 3",
   tagline:
-    "Rebuilt a healthcare credentialing platform for US medical practices, with an AI pipeline that reads licences and certificates under human review.",
+    "Contribution à la reconstruction d'une plateforme de gestion des accréditations pour des cabinets médicaux américains, avec un pipeline IA d'analyse documentaire sous revue humaine.",
   problem:
-    "Doctors must be approved by every insurer, and every licence, certification and insurance document expires. The legacy app had only 4 of 17 features working, data protection disabled on most tables and health data visible in logs — a HIPAA risk. Documents arrive as scans or phone photos, and typing them in by hand is slow and error-prone.",
+    "Les professionnels doivent être accrédités auprès de chaque assureur, et les licences, certifications et attestations expirent. L'application existante avait 4 fonctionnalités sur 17 opérationnelles, une protection des données incomplète et des données de santé visibles dans les journaux. Les documents arrivent sous forme de scans ou de photos, et leur saisie manuelle est lente et source d'erreurs.",
   solution:
-    "We rebuilt the platform on Next.js and Supabase with strict per-practice data isolation, a 12-state credentialing workflow enforced by the database and a full audit trail. For documents, we designed an AI pipeline where a specialist model extracts JSON with the exact OCR evidence, a second model verifies it, and a human always validates before anything is saved.",
+    "La plateforme a été reconstruite avec Next.js et Supabase, une isolation des données par cabinet, un workflow d'accréditation à 12 états appliqué par la base et une piste d'audit. Pour les documents, le pipeline extrait des champs structurés et leurs preuves OCR, les fait vérifier, puis impose une validation humaine avant toute sauvegarde.",
   architecture: [
-    { step: "Front-end", detail: "Next.js App Router, TypeScript (strict), Tailwind + shadcn/ui, shared Zod validation" },
-    { step: "API", detail: "Every route: authenticate → validate (Zod) → scope to the practice → audit log" },
-    { step: "Data", detail: "Supabase PostgreSQL with Row-Level Security, private storage, short-lived signed URLs" },
-    { step: "Workflow", detail: "12-state credentialing machine per provider × payer, transitions enforced in SQL" },
-    { step: "AI extraction", detail: "Specialist model → JSON + OCR evidence, verifier model, human review queue" },
-    { step: "Ops", detail: "Vercel, Upstash Redis rate limiting, scheduled expiry alerts, Resend & Twilio" },
+    { step: "Front-end", detail: "Next.js App Router, TypeScript strict, Tailwind et validation Zod partagée" },
+    { step: "API", detail: "Chaque route : authentification → validation (Zod) → périmètre du cabinet → journal d'audit" },
+    { step: "Données", detail: "Supabase PostgreSQL avec Row-Level Security, stockage privé et URLs signées à durée limitée" },
+    { step: "Workflow", detail: "Cycle d'accréditation à 12 états par professionnel et assureur, transitions appliquées en SQL" },
+    { step: "Extraction IA", detail: "Modèle spécialisé → JSON et preuves OCR → modèle de vérification → revue humaine" },
+    { step: "Opérations", detail: "Vercel, limitation de débit Upstash Redis, alertes d'expiration planifiées, Resend et Twilio" },
   ],
   contributions: [
-    "Built the whole front-end: design system, reusable components and every portal screen",
-    "Dashboard with a 0–100 compliance score, provider records (11 document types), pipeline, alerts and audit grid",
-    "Public, account-free document upload page for doctors (secure link + one-time code)",
-    "Benchmarked 4 vision-language models on 180 degraded-document observations each to choose the reader model",
-    "Fine-tuned Qwen3-1.7B with LoRA on a free Kaggle T4 GPU to prove training was feasible without health data",
+    "Pris en charge le front-end : système de design, composants réutilisables et interfaces du portail",
+    "Contribué au tableau de bord, aux dossiers professionnels, au pipeline, aux alertes et à la grille d'audit",
+    "Créé la page publique de dépôt de documents avec lien sécurisé et code à usage unique",
+    "Comparé quatre modèles vision-langage sur 180 observations chacun",
+    "Fine-tuné Qwen3-1.7B avec LoRA sur GPU T4 sans utiliser de données de santé",
   ],
   stack: [
     "Next.js",
@@ -71,39 +73,41 @@ const lamaHealthcare: FeaturedProject = {
     "TRL",
   ],
   categories: ["AI / ML", "Full-Stack"],
+  codePrivate: true,
   results: [
-    { value: "100%", label: "Valid JSON outputs (60/60)" },
-    { value: "87%", label: "Fields correct (124/143)" },
-    { value: "3.3 GB", label: "Peak VRAM for fine-tuning" },
-    { value: "6 / 6", label: "Roles passing access tests" },
+    { value: "100%", label: "Valid JSON · 60/60 sorties" },
+    { value: "87%", label: "Champs corrects · 124/143 · CORD" },
+    { value: "3,3 Go", label: "Pic de VRAM du fine-tuning" },
+    { value: "6 / 6", label: "Rôles validés par les tests d'accès" },
   ],
-  images: [{ src: "/projects/lama-dashboard.webp", alt: "Practice One dashboard: providers, credentialing pipeline, expiring documents, blockers" }],
-  note: "Company project — source code is private. Extraction results measured on the public CORD dataset, not on real health documents.",
+  note: "Résultats d'extraction mesurés sur le dataset public CORD, jamais sur des documents de santé réels. La capture du dashboard est masquée en attendant la confirmation de l'autorisation de publication.",
+  resultContext:
+    "~0,94 de rappel de champs concerne des scans propres utilisés au benchmark des modèles ; 87 % (124/143) est l'exactitude des champs sur le dataset public CORD après fine-tuning. Ce sont deux protocoles d'évaluation distincts.",
 };
 
 const trendRadar: FeaturedProject = {
-  label: "Featured · Personal project",
+  label: "Projet personnel",
   slug: "trendradar",
   title: "TrendRadar",
-  tagline: "Real-time trend detection and virality prediction on social media data.",
+  tagline: "Détection de tendances en temps réel et prédiction de viralité sur les réseaux sociaux.",
   problem:
-    "Spotting emerging topics early in a noisy, bilingual stream of social posts is hard: keyword counts miss context, and popular topics are only obvious once they have already peaked.",
+    "Repérer tôt les sujets émergents dans un flux bilingue et bruité est difficile : les comptes de mots-clés ignorent le contexte, et les tendances ne deviennent évidentes qu'après leur pic.",
   solution:
-    "An end-to-end ML application that collects live Reddit posts, cleans them with a French/English NLP pipeline, groups them into topics, detects sudden bursts of activity and predicts which posts are likely to go viral — all inside an interactive dashboard.",
+    "Application ML de bout en bout qui collecte des publications Reddit, les traite avec un pipeline NLP français/anglais, les regroupe par thème, détecte les hausses d'activité et estime la viralité des publications dans un tableau de bord interactif.",
   architecture: [
-    { step: "Collect", detail: "Reddit API client with retries, live streaming and Parquet caching" },
-    { step: "Preprocess", detail: "Language detection, spaCy lemmatisation and NER (FR/EN), TF-IDF" },
-    { step: "Model", detail: "KMeans topic clustering, Random Forest topic classifier" },
-    { step: "Detect", detail: "Sliding-window burst score to flag fast-rising terms and hashtags" },
-    { step: "Predict", detail: "Gradient-boosting virality model (XGBoost / LightGBM fallback)" },
-    { step: "Visualise", detail: "Streamlit dashboard: clusters, bursts, virality, feature importance" },
+    { step: "Collecte", detail: "Client API Reddit avec nouvelles tentatives, flux et cache Parquet" },
+    { step: "Prétraitement", detail: "Détection de langue, lemmatisation spaCy et NER (FR/EN), TF-IDF" },
+    { step: "Modèles", detail: "Clustering thématique KMeans et classification Random Forest" },
+    { step: "Détection", detail: "Score de hausse par fenêtre glissante pour repérer termes et hashtags émergents" },
+    { step: "Prédiction", detail: "Modèle de viralité par gradient boosting (XGBoost / LightGBM)" },
+    { step: "Visualisation", detail: "Tableau de bord Streamlit : clusters, pics, viralité, importance des variables" },
   ],
   contributions: [
-    "Designed the full data → model → dashboard pipeline (~3,300 lines of Python, 5 modules)",
-    "Built a bilingual NLP pipeline with spaCy, NLTK and language detection",
-    "Implemented burst detection from scratch, including fixes for score explosions and duplicate alerts",
-    "Engineered virality features (early velocity, engagement ratio, author and subreddit diversity)",
-    "Built the multi-tab Streamlit interface and admin dashboard",
+    "Conçu le pipeline complet données → modèles → tableau de bord (~3 300 lignes Python, 5 modules)",
+    "Développé un pipeline NLP bilingue avec spaCy, NLTK et détection de langue",
+    "Implémenté la détection de hausse et corrigé les scores instables et alertes en doublon",
+    "Construit les variables de viralité : vélocité initiale, engagement et diversité des auteurs et subreddits",
+    "Réalisé l'interface Streamlit multi-onglets et le tableau de bord d'administration",
   ],
   stack: ["Python", "Scikit-learn", "spaCy", "NLTK", "Pandas", "Plotly", "Streamlit", "XGBoost / LightGBM"],
   categories: ["AI / ML", "NLP"],
@@ -116,77 +120,67 @@ export const featuredProjects: FeaturedProject[] = [lamaHealthcare, trendRadar];
 export const projects: Project[] = [
   {
     slug: "image-captioning",
-    title: "Image Captioning — CNN vs Attention vs Transformer",
-    tagline: "From-scratch PyTorch captioning system benchmarking three decoder architectures.",
+    title: "Génération de légendes d'images — CNN vs attention vs Transformer",
+    tagline: "Système PyTorch comparant trois architectures de décodeur.",
     problem:
-      "Which decoder design actually produces better image descriptions? Comparing architectures fairly requires the same encoder, data and evaluation.",
+      "Quelle architecture de décodeur produit les meilleures descriptions d'images ? Une comparaison équitable exige un encodeur, des données et une évaluation identiques.",
     solution:
-      "A frozen ResNet50 encoder feeds three decoders — LSTM baseline, Bahdanau attention and a Transformer decoder — trained on Flickr8k and compared with BLEU-1 to BLEU-4, beam search and attention heatmaps in a Streamlit demo.",
+      "Un encodeur ResNet50 gelé alimente trois décodeurs — LSTM, attention de Bahdanau et Transformer — entraînés sur Flickr8k et comparés avec BLEU-1 à BLEU-4, beam search et visualisations d'attention.",
     stack: ["PyTorch", "ResNet50", "LSTM", "Attention", "Transformer", "Streamlit"],
     categories: ["Deep Learning", "NLP"],
-    results: [
-      // Add real BLEU scores once the repository is public, e.g. { value: "0.xx", label: "BLEU-4 (Transformer)" }
-    ],
-    github: `${GH}/Image-Captioning-Project`,
-    note: "Repository currently private — make it public so this link works.",
+    results: [],
+    github: `${GH}/Image-Capitioning`,
+    note: "Les scores BLEU-1 à BLEU-4 des trois décodeurs et les exemples de légendes ne sont pas publiés ici.",
   },
   {
     slug: "cifar10-cnn",
-    title: "CIFAR-10 CNN Classifier",
-    tagline: "GPU-trained convolutional network with a deployed web demo.",
-    problem: "Classify real-world photos into 10 object classes with a compact model trained on 32×32 images.",
+    title: "Classification CIFAR-10 par CNN",
+    tagline: "Réseau convolutif entraîné sur GPU et exposé dans une démo web.",
+    problem: "Classer des images parmi 10 catégories avec un modèle compact entraîné sur des images 32×32.",
     solution:
-      "A 3-block CNN (BatchNorm, Dropout, ~500K parameters) trained on a Tesla T4 GPU with PyTorch, served through a Dockerised Streamlit app that accepts any uploaded image.",
+      "CNN à 3 blocs (BatchNorm, Dropout, environ 500 000 paramètres), entraîné avec PyTorch sur GPU Tesla T4 et servi dans une application Streamlit conteneurisée acceptant une image importée.",
     stack: ["PyTorch", "CUDA", "CNN", "Streamlit", "Docker"],
-    categories: ["Deep Learning"],
+    categories: ["Deep Learning", "Computer Vision"],
     results: [
-      { value: "~78%", label: "Test accuracy" },
-      { value: "~500K", label: "Parameters" },
+      { value: "~78 %", label: "Précision sur le jeu de test" },
+      { value: "~500 k", label: "Paramètres" },
     ],
     github: `${GH}/Animal-Classification`,
     demo: "https://animal-classification-2gd59hwka4ppwvsjsnp7cp.streamlit.app/",
     images: [
-      { src: "/projects/cifar-plane.webp", alt: "Streamlit app predicting 'airplane'" },
-      { src: "/projects/cifar-cat.webp", alt: "Streamlit app predicting 'cat'" },
-      { src: "/projects/cifar-dog.webp", alt: "Streamlit app predicting 'dog'" },
+      { src: "/projects/cifar-plane.webp", alt: "Exemple de prédiction de la classe avion dans l'application Streamlit" },
+      { src: "/projects/cifar-cat.webp", alt: "Exemple de prédiction de la classe chat dans l'application Streamlit" },
+      { src: "/projects/cifar-dog.webp", alt: "Exemple de prédiction de la classe chien dans l'application Streamlit" },
     ],
   },
   {
     slug: "news-classification",
-    title: "News Category Classification",
-    tagline: "Bidirectional LSTM classifying news articles into 42 categories.",
+    title: "Classification de catégories d'actualités",
+    tagline: "BiLSTM classant des articles parmi 42 catégories.",
     problem:
-      "Automatically route news articles to the right section among 42 overlapping categories (e.g. Arts vs Arts & Culture).",
+      "Orienter automatiquement des articles parmi 42 catégories qui se chevauchent (par exemple Arts et Arts & Culture).",
     solution:
-      "NLP pipeline (cleaning, stop-words, tokenisation, padding) feeding an Embedding + BiLSTM network with class balancing, early stopping and LR scheduling, evaluated on ~42K held-out articles.",
+      "Pipeline NLP (nettoyage, mots vides, tokenisation, padding) alimentant un réseau Embedding + BiLSTM, avec équilibrage des classes, arrêt anticipé et ajustement du taux d'apprentissage. Évaluation sur environ 42 000 articles mis de côté.",
     stack: ["TensorFlow / Keras", "BiLSTM", "NLTK", "Scikit-learn", "Pandas"],
     categories: ["NLP", "Deep Learning"],
     results: [
-      { value: "69.0%", label: "Top-3 accuracy (42 classes)" },
-      { value: "45.4%", label: "Top-1 accuracy" },
+      { value: "69,0 %", label: "Précision Top-3 · 42 classes" },
+      { value: "45,4 %", label: "Précision Top-1" },
     ],
+    resultContext:
+      "Évalué sur environ 42 000 articles tenus à l'écart, répartis entre 42 catégories qui se chevauchent. Les scores de baseline hasard et TF-IDF + régression logistique restent à mesurer ; les confusions attendues concernent notamment Arts et Arts & Culture.",
     github: `${GH}/News-Classification-Project`,
   },
   {
     slug: "flight-tracker",
-    title: "Real-Time Flight Tracker + AI Travel Assistant",
-    tagline: "React app with live flight data and an LLM-powered travel chatbot.",
-    problem: "Travellers need live departure information and quick destination ideas in one place.",
+    title: "Suivi de vols en temps réel & assistant de voyage IA",
+    tagline: "Application React avec données de vol et assistant conversationnel.",
+    problem: "Les voyageurs ont besoin de consulter les départs et de trouver des idées de destinations au même endroit.",
     solution:
-      "React front-end consuming the AviationStack API for real-time flights, plus a Flask backend that connects a conversational assistant to Google Gemini with a custom system prompt and per-session chat history.",
+      "Interface React connectée à l'API AviationStack pour les vols, et serveur Flask reliant un assistant conversationnel à Google Gemini avec prompt système dédié et historique par session.",
     stack: ["React", "JavaScript", "Flask", "Gemini API", "REST APIs"],
     categories: ["Full-Stack", "AI / ML"],
     results: [],
     github: `${GH}/flight-management`,
-  },
-];
-
-/** Smaller repos shown in the GitHub section. */
-export const otherRepos = [
-  {
-    name: "backend-costume",
-    description: "Inventory management REST API with JWT authentication and admin module.",
-    stack: ["Laravel", "PHP", "MySQL"],
-    url: `${GH}/backend-costume`,
   },
 ];

@@ -1,36 +1,37 @@
 /**
  * Experience & education.
  * Source: PFA defence slides (Soutenance PFA — EMSI, 2025–2026).
- * Anything in [BRACKETS] is a placeholder — replace it or delete it.
+ * The dates and duration below reflect the available PFA defence material.
  */
 
 export type Experience = {
   company: string;
   role: string;
   period: string;
-  location?: string;
+  location?: string | null;
   summary: string;
   achievements: string[];
   stack: string[];
-  placeholder?: boolean;
+  caseStudy?: string;
 };
 
 export const experiences: Experience[] = [
   {
     company: "Lama Healthcare — Practice One",
-    role: "Front-end & AI Intern — Final-year project (PFA)",
-    period: "2026 · 8 weeks",
-    location: "[CITY / Remote]",
+    role: "Stage de projet de fin d'année (PFA) · Front-end & IA",
+    period: "2026 · 8 semaines",
+    location: null,
     summary:
-      "Rebuilt, in a team of three interns, a HIPAA-compliant credentialing platform used by US medical practices, and ran the two AI experiments behind its document-extraction pipeline.",
+      "En équipe de trois, contribution à la reconstruction d'une plateforme de gestion des accréditations destinée à des cabinets médicaux américains et aux expérimentations d'extraction documentaire. Ce PFA de 8 semaines est distinct du stage PFE de 6 mois recherché.",
     achievements: [
-      "Owned the entire front-end: design system, reusable components and all portal screens, including a full UI redesign",
-      "Shipped the dashboard (0–100 compliance score), provider records, credentialing pipeline, alerts, audit grid and a public document-upload page",
-      "Benchmarked 4 vision-language models (180 observations each) — ~0.94 field recall on clean scans",
-      "Fine-tuned Qwen3-1.7B with LoRA on a free T4 GPU (3.3 GB peak VRAM): 100% valid JSON, 87% of fields correct on the public CORD dataset",
-      "Access tests passing for all 6 user roles; sensitive data masked and every reveal audited",
+      "Pris en charge le front-end : système de design, composants réutilisables et écrans du portail, avec refonte de l'interface",
+      "Livré le tableau de bord, les dossiers professionnels, le workflow d'accréditation, les alertes, l'audit et une page publique de dépôt de documents",
+      "Comparé 4 modèles vision-langage sur 180 observations chacun — rappel d'environ 0,94 sur des scans propres",
+      "Fine-tuné Qwen3-1.7B avec LoRA sur GPU T4 (3,3 Go de VRAM au pic) : 100 % de JSON valides et 87 % de champs corrects sur le dataset public CORD",
+      "Tests d'accès concluants pour les 6 rôles ; données masquées et chaque révélation auditée",
     ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Zod", "Transformers", "PEFT / LoRA"],
+    caseStudy: "/projects/lama-credentialing",
   },
 ];
 
@@ -39,19 +40,16 @@ export type Education = {
   school: string;
   period: string;
   details?: string;
-  placeholder?: boolean;
 };
 
 export const education: Education[] = [
   {
-    degree: "AI & Data Science — 5th Year",
+    degree: "Cycle ingénieur · Intelligence Artificielle & Data Science · 5e année",
     school: "EMSI — École Marocaine des Sciences de l'Ingénieur",
-    period: "[START_YEAR] — 2026",
+    period: "Année universitaire 2025–2026",
     details:
-      "Final-year project (PFA): HIPAA-compliant credentialing platform with an AI-assisted document extraction pipeline, at Lama Healthcare.",
+      "Projet de fin d'année (PFA) de 8 semaines chez Lama Healthcare. Le stage PFE de 6 mois constitue une prochaine expérience distincte.",
   },
 ];
 
-export const certifications: { name: string; issuer: string; year: string }[] = [
-  // { name: "[CERTIFICATION]", issuer: "[ISSUER]", year: "[YEAR]" },
-];
+export const certifications: { name: string; issuer: string; year: string }[] = [];
