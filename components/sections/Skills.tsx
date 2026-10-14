@@ -1,5 +1,5 @@
 import { Brain, Code2, Database, Wrench } from "lucide-react";
-import { skillGroups } from "@/data/skills";
+import { coreSkills, skillGroups } from "@/data/skills";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
 
@@ -10,10 +10,20 @@ export function Skills() {
     <Section
       id="skills"
       index="03"
-      eyebrow="Skills"
-      title="Technologies I use"
-      intro="Only tools I have actually used in my projects."
+      eyebrow="Compétences"
+      title="Compétences techniques"
+      intro="Une sélection de compétences mobilisées dans mes projets ; les autres outils utilisés sont regroupés ci-dessous."
     >
+      <Reveal className="mb-8 rounded-xl border border-border bg-surface p-6 sm:p-7">
+        <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-accent">Compétences cœur</h3>
+        <ul className="flex flex-wrap gap-2">
+          {coreSkills.map((skill) => (
+            <li key={skill} className="rounded-md border border-border-strong bg-bg px-3 py-2 text-sm font-medium text-fg">
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </Reveal>
       <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
         {skillGroups.map((g, i) => {
           const Icon = icons[i % icons.length];

@@ -9,19 +9,27 @@ export type SkillGroup = {
   items: string[];
 };
 
+export const coreSkills = [
+  "Python",
+  "PyTorch",
+  "Transformers / LoRA (PEFT)",
+  "Scikit-learn",
+  "NLP",
+  "Computer Vision",
+  "Document AI",
+  "Streamlit",
+  "Docker",
+  "Next.js / TypeScript",
+];
+
 export const skillGroups: SkillGroup[] = [
   {
-    title: "AI & Machine Learning",
-    description: "Model design, training and evaluation",
+    title: "Aussi utilisé · IA & Machine Learning",
+    description: "Modélisation, entraînement et évaluation",
     items: [
-      "Python",
-      "PyTorch",
       "TensorFlow / Keras",
-      "Scikit-learn",
       "CNN",
       "LSTM / BiLSTM",
-      "Transformers (Hugging Face)",
-      "LLM Fine-tuning (LoRA / PEFT)",
       "Vision-Language Models",
       "Transfer Learning",
       "Clustering (KMeans)",
@@ -29,11 +37,9 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "NLP & Data",
-    description: "From raw text and tables to insight",
+    title: "Aussi utilisé · NLP & Données",
+    description: "Préparation, analyse et visualisation",
     items: [
-      "NLP",
-      "Document AI / Extraction",
       "spaCy",
       "NLTK",
       "TF-IDF",
@@ -45,26 +51,21 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Development",
-    description: "Turning models into products",
+    title: "Aussi utilisé · Développement",
+    description: "Interfaces, APIs et intégration",
     items: [
-      "Next.js",
       "React",
-      "TypeScript",
       "JavaScript",
       "Tailwind CSS",
       "Supabase",
       "PostgreSQL",
       "Flask",
       "REST APIs",
-      "Laravel / PHP",
-      "MySQL",
-      "Streamlit",
     ],
   },
   {
-    title: "Tools",
-    description: "Everyday workflow",
-    items: ["Git", "GitHub", "Docker", "Vercel", "Kaggle", "Google Colab", "CUDA (GPU training)", "Postman", "Jupyter"],
+    title: "Aussi utilisé · Outils",
+    description: "Environnement de travail",
+    items: ["Git", "GitHub", "Vercel", "Kaggle", "Google Colab", "CUDA (entraînement GPU)", "Postman", "Jupyter"],
   },
 ];

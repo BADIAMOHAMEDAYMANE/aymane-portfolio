@@ -18,15 +18,15 @@ All content lives in `data/` — no need to touch components.
 
 | File | What it contains |
 |---|---|
-| `data/profile.ts` | Name, tagline, email, links, About text, CV link |
+| `data/profile.ts` | Name, role, contact details, CV, availability and language data |
 | `data/projects.ts` | Featured project + project cards + other repos |
 | `data/skills.ts` | Skill groups |
-| `data/experience.ts` | Experience, education, certifications (**placeholders to fill**) |
+| `data/experience.ts` | Experience, education and certifications |
 
-Anything written as `[LIKE_THIS]` is a placeholder. Entries with `placeholder: true` show a "TO COMPLETE" badge — set it to `false` (or remove it) once filled.
+Personal details that have not been confirmed are represented as `null` or empty arrays in the data files and are not rendered on the site. Complete them with verified information before publishing.
 
-**Add your CV:** put `cv.pdf` in `public/` and set `resume: "/cv.pdf"` in `data/profile.ts`.
-**Add a screenshot:** put a `.webp` in `public/projects/` and add it to the project's `images` array.
+**CV:** the available French PDF is served at `/cv-fr.pdf`. Add an English version only after receiving the final document.
+**Project images:** add a `.webp` in `public/projects/` and reference it from the project's `images` array only after confirming publication rights and removing confidential information.
 
 ## Structure
 
@@ -38,6 +38,7 @@ app/
   icon.svg              # favicon
   robots.ts, sitemap.ts
   fonts/                # self-hosted Inter & JetBrains Mono (variable)
+  projects/lama-credentialing/ # detailed PFA case study
 components/
   Navbar.tsx, Footer.tsx, ProjectCard.tsx, NeuralNet.tsx
   sections/             # Hero, About, Projects, FeaturedProject, Skills, Experience, GitHub, Contact
@@ -66,7 +67,7 @@ public/projects/        # project screenshots
 
 1. Push this folder to a new GitHub repository (e.g. `portfolio`).
 2. Go to <https://vercel.com/new>, import the repository. Framework is auto-detected as **Next.js** — keep defaults.
-3. Add the environment variable `NEXT_PUBLIC_SITE_URL` = your final URL (e.g. `https://aymane-badia.vercel.app`, no trailing slash).
+3. Add `NEXT_PUBLIC_SITE_URL` with the final production URL you control (absolute URL, no trailing slash). Canonical, sitemap and robots URLs are omitted until this is configured.
 4. Click **Deploy**. Then redeploy once if you changed the URL/domain after the first deploy.
 5. Check the LinkedIn preview with <https://www.linkedin.com/post-inspector/>.
 

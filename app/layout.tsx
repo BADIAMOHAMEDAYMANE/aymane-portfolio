@@ -17,12 +17,12 @@ const jetbrains = localFont({
   display: "swap",
 });
 
-const title = `${profile.name} | AI & Data Science Student`;
+const title = `${profile.name} — Ingénieur IA & Data Science · Recherche stage PFE`;
 const description =
-  "AI & Data Science student building end-to-end Machine Learning, Deep Learning and NLP projects — from data pipelines to deployed applications. Open to internships.";
+  "Élève-ingénieur IA & Data Science à l'EMSI, spécialisé en LLM fine-tuning, Document AI et Deep Learning. Recherche un stage PFE de 6 mois.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(profile.siteUrl),
+  ...(profile.siteUrl ? { metadataBase: new URL(profile.siteUrl) } : {}),
   title: { default: title, template: `%s | ${profile.name}` },
   description,
   applicationName: profile.name,
@@ -30,27 +30,42 @@ export const metadata: Metadata = {
   creator: profile.name,
   keywords: [
     profile.name,
-    "AI Engineer",
+    "Ingénieur IA",
     "Data Science",
     "Machine Learning",
     "Deep Learning",
     "NLP",
     "PyTorch",
     "Portfolio",
-    "Internship",
+    "Stage PFE",
   ],
-  alternates: { canonical: "/" },
+  ...(profile.siteUrl ? { alternates: { canonical: "/" } } : {}),
   openGraph: {
     type: "profile",
-    url: "/",
+    ...(profile.siteUrl ? { url: profile.siteUrl } : {}),
     siteName: profile.name,
     title,
     description,
-    locale: "en_US",
+    locale: "fr_MA",
     firstName: "Mohamed Aymane",
     lastName: "Badia",
+    ...(profile.siteUrl
+      ? {
+          images: [{
+            url: `${profile.siteUrl}/api/og`,
+            width: 1200,
+            height: 630,
+            alt: `${profile.name} — Élève-ingénieur IA & Data Science, recherche stage PFE`,
+          }],
+        }
+      : {}),
   },
-  twitter: { card: "summary_large_image", title, description },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    ...(profile.siteUrl ? { images: [`${profile.siteUrl}/api/og`] } : {}),
+  },
   robots: { index: true, follow: true },
 };
 
@@ -67,7 +82,7 @@ const themeScript = `try{var t=localStorage.getItem('theme');if(t==='light')docu
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="fr"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrains.variable}`}

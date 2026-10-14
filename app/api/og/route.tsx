@@ -1,11 +1,11 @@
 import { ImageResponse } from "next/og";
 import { profile } from "@/data/profile";
 
-export const alt = `${profile.name} — AI & Data Science Student`;
+export const alt = `${profile.name} — Élève-ingénieur IA & Data Science, recherche stage PFE`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export async function GET() {
   const tags = ["Machine Learning", "Deep Learning", "NLP", "PyTorch"];
   return new ImageResponse(
     (
@@ -24,16 +24,16 @@ export default function OpengraphImage() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14, color: "#2dd4bf", fontSize: 26 }}>
           <div style={{ width: 14, height: 14, borderRadius: 7, background: "#2dd4bf" }} />
-          Open to AI / Data Science internships
+          Recherche un stage PFE de 6 mois
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 76, fontWeight: 700, letterSpacing: -2 }}>{profile.name}</div>
-          <div style={{ fontSize: 38, color: "#8b8b92" }}>AI & Data Science Student</div>
+          <div style={{ fontSize: 38, color: "#b4b4bc" }}>Élève-ingénieur IA &amp; Data Science</div>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          {tags.map((t) => (
+          {tags.map((tag) => (
             <div
-              key={t}
+              key={tag}
               style={{
                 fontSize: 24,
                 padding: "10px 20px",
@@ -42,7 +42,7 @@ export default function OpengraphImage() {
                 color: "#d4d4d8",
               }}
             >
-              {t}
+              {tag}
             </div>
           ))}
         </div>
