@@ -12,7 +12,10 @@ export const profile = {
     "LLM fine-tuning · Document AI · Deep Learning — de l'expérimentation à des applications utilisables.",
   status: "Recherche un stage PFE de 6 mois en IA / Machine Learning / Data Science",
   location: null as string | null,
-  languages: [] as { name: string; level: string }[],
+  languages: [
+    { name: "Français", level: "B2" },
+    { name: "Anglais", level: "B1" },
+  ],
   email: "badiamohamedaymane@gmail.com",
   github: "https://github.com/BADIAMOHAMEDAYMANE",
   githubUsername: "BADIAMOHAMEDAYMANE",
@@ -22,7 +25,7 @@ export const profile = {
     duration: "6 mois",
     topics: ["LLM / NLP", "Computer Vision", "Document AI", "MLOps"],
     start: null as string | null,
-    mobility: null as string | null,
+    mobility: "Présentiel ou à distance",
   },
   // Prefer the custom domain; Vercel's deployment hostname is a safe fallback.
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
