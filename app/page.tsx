@@ -15,7 +15,7 @@ const jsonLd = {
   name: profile.name,
   jobTitle: profile.role,
   email: `mailto:${profile.email}`,
-  url: profile.siteUrl,
+  ...(profile.siteUrl ? { url: profile.siteUrl } : {}),
   sameAs: [profile.github, profile.linkedin],
   knowsAbout: ["Machine Learning", "Deep Learning", "Natural Language Processing", "Data Science"],
 };

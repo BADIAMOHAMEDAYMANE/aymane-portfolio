@@ -7,7 +7,7 @@ export function Footer() {
         <p>
           © {profile.name}
         </p>
-        <p className="font-mono">Built with Next.js · Tailwind CSS · Deployed on Vercel</p>
+        <p className="font-mono">Réalisé avec Next.js · Tailwind CSS</p>
       </div>
     </footer>
   );

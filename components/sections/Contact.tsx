@@ -17,22 +17,25 @@ export function Contact() {
       id="contact"
       index="06"
       eyebrow="Contact"
-      title="Let's work together"
-      intro="I'm looking for an internship in AI, Machine Learning or Data Science. If you think I'd be a good fit for your team, I'd love to hear from you."
+      title="Échangeons"
+      intro="Je recherche un stage PFE de six mois en IA, Machine Learning ou Data Science. Le PFA de 8 semaines chez Lama Healthcare est une expérience antérieure, distincte de cette recherche."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] [&>*]:min-w-0">
         <Reveal className="flex flex-col justify-between gap-8 rounded-xl border border-border bg-surface p-6 sm:p-8">
           <p className="text-lg leading-relaxed text-fg">
-            The fastest way to reach me is by email. I&apos;m also happy to connect on LinkedIn.
+            Pour parler d’un stage ou d’un projet, contactez-moi par email ou sur LinkedIn.
           </p>
           <div className="flex flex-wrap gap-3">
             <ButtonLink href={`mailto:${profile.email}`} variant="primary">
-              <Mail className="size-4" /> Send an email
+              <Mail className="size-4" /> Envoyer un email
             </ButtonLink>
-            {profile.resume && (
-              <ButtonLink href={profile.resume} external>
-                <FileText className="size-4" /> Resume
-              </ButtonLink>
+            <ButtonLink href={profile.resume} download="Mohamed-Aymane-Badia-CV-FR.pdf">
+              <FileText className="size-4" /> Télécharger mon CV
+            </ButtonLink>
+            {(profile.location || profile.lookingFor.start || profile.lookingFor.mobility) && (
+              <p className="w-full text-sm text-muted">
+                {[profile.location, profile.lookingFor.start && `Disponible à partir de ${profile.lookingFor.start}`, profile.lookingFor.mobility && `Mobilité : ${profile.lookingFor.mobility}`].filter(Boolean).join(" · ")}
+              </p>
             )}
           </div>
         </Reveal>
@@ -50,7 +53,7 @@ export function Contact() {
                     {c.icon}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-mono text-[11px] uppercase tracking-wider text-subtle">{c.label}</span>
+                    <span className="block font-mono text-[11px] uppercase tracking-wider text-muted">{c.label}</span>
                     <span className="block truncate text-sm text-fg">{c.value}</span>
                   </span>
                   <ArrowUpRight className="size-4 shrink-0 text-subtle transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-fg" />

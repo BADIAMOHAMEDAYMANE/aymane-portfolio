@@ -1,38 +1,44 @@
 /**
  * Single source of truth for personal information.
- * Anything wrapped in [BRACKETS] is a placeholder — replace it with real data.
+ * Missing personal details stay null and are intentionally not rendered.
  */
 
 export const profile = {
   name: "Mohamed Aymane Badia",
-  shortName: "Mohamed Aymane Badia",
+  shortName: "Aymane Badia",
   initials: "AB",
-  role: "AI & Data Science Student",
+  role: "Élève-ingénieur IA & Data Science",
   tagline:
-    "I build end-to-end AI applications — from data pipelines, deep learning and LLM fine-tuning to deployed, usable interfaces.",
-  status: "Open to internship opportunities in AI / Data Science",
-  location: "[YOUR_CITY], Morocco",
+    "LLM fine-tuning · Document AI · Deep Learning — de l'expérimentation à des applications utilisables.",
+  status: "Recherche un stage PFE de 6 mois en IA / Machine Learning / Data Science",
+  location: null as string | null,
+  languages: [] as { name: string; level: string }[],
   email: "badiamohamedaymane@gmail.com",
   github: "https://github.com/BADIAMOHAMEDAYMANE",
   githubUsername: "BADIAMOHAMEDAYMANE",
   linkedin: "https://www.linkedin.com/in/mohamed-aymane-badia-40a9712a1/",
-  // Put your CV in /public/cv.pdf and set this to "/cv.pdf" to show a "Resume" button.
-  resume: "" as string,
-  // Set this to your Vercel / custom domain once deployed (no trailing slash).
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://your-portfolio.vercel.app",
+  resume: "/cv-fr.pdf",
+  lookingFor: {
+    duration: "6 mois",
+    topics: ["LLM / NLP", "Computer Vision", "Document AI", "MLOps"],
+    start: null as string | null,
+    mobility: null as string | null,
+  },
+  // Prefer the custom domain; Vercel's deployment hostname is a safe fallback.
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
 } as const;
 
 export const about = {
   paragraphs: [
-    "I'm a 5th-year student in Artificial Intelligence & Data Science at EMSI, focused on Machine Learning, Deep Learning and NLP.",
-    "During my final-year internship at Lama Healthcare, I helped rebuild a HIPAA-compliant platform for US medical practices — owning the front-end and running the AI experiments behind its document-extraction pipeline, including LoRA fine-tuning of an LLM.",
-    "I learn by building. My projects go beyond the notebook: I take a model from raw data to training, evaluation and a working application — a Streamlit demo, a Dockerised deployment or a full-stack web app.",
-    "I'm looking for an internship where I can apply this to real-world problems and grow as an AI / Data Science engineer.",
+    "Je suis élève-ingénieur en 5e année d'Intelligence Artificielle & Data Science à l'EMSI, avec un intérêt particulier pour le Machine Learning, le Deep Learning et le NLP.",
+    "Dans le cadre de mon projet de fin d'année (PFA, 8 semaines) chez Lama Healthcare, j'ai contribué à reconstruire une plateforme de credentialing et mené des expérimentations d'extraction documentaire, dont un fine-tuning LoRA. Ce PFA est distinct du stage PFE de 6 mois que je recherche.",
+    "J'apprends en construisant. Mes projets vont au-delà du notebook : je travaille de la préparation des données à l'entraînement, l'évaluation et l'intégration dans une application — démo Streamlit, déploiement Docker ou application web.",
+    "Je recherche un stage PFE de 6 mois en IA, Machine Learning ou Data Science, autour du NLP/LLM, de la Computer Vision, du Document AI ou du déploiement de modèles.",
   ],
   highlights: [
-    { label: "Focus", value: "ML · Deep Learning · NLP" },
-    { label: "Approach", value: "Data → Model → Product" },
-    { label: "Internship", value: "Lama Healthcare (PFA)" },
-    { label: "Currently", value: "5th year, AI & Data Science — EMSI" },
+    { label: "Domaines", value: "ML · Deep Learning · NLP" },
+    { label: "Approche", value: "Données → Modèle → Produit" },
+    { label: "Projet de fin d'année", value: "Lama Healthcare · PFA · 8 semaines" },
+    { label: "Formation", value: "5e année · IA & Data Science · EMSI" },
   ],
 };

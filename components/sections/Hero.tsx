@@ -1,11 +1,11 @@
-import { ArrowDown, Mail } from "lucide-react";
+import { ArrowDown, FileDown, Mail } from "lucide-react";
 import Image from "next/image";
 import { profile } from "@/data/profile";
 import { ButtonLink } from "../ui/ButtonLink";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons";
 import { NeuralNet } from "../NeuralNet";
 
-const focus = ["Machine Learning", "Deep Learning", "NLP", "LLM Fine-tuning", "Computer Vision"];
+const focus = ["Machine Learning", "Deep Learning", "NLP", "LLM fine-tuning", "Computer Vision"];
 
 export function Hero() {
   return (
@@ -24,7 +24,7 @@ export function Hero() {
           <h1 className="text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-[3.4rem] lg:leading-[1.05]">
             {profile.name}
           </h1>
-          <p className="mt-3 font-mono text-sm text-accent sm:text-base">{profile.role}</p>
+          <p className="mt-3 font-mono text-sm text-accent sm:text-base">{profile.role} · LLM fine-tuning · Document AI · Deep Learning</p>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{profile.tagline}</p>
 
@@ -38,7 +38,10 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <ButtonLink href="#projects" variant="primary">
-              View Projects <ArrowDown className="size-4" />
+              Voir les projets <ArrowDown className="size-4" />
+            </ButtonLink>
+            <ButtonLink href={profile.resume} download="Mohamed-Aymane-Badia-CV-FR.pdf" variant="secondary">
+              <FileDown className="size-4" /> Télécharger mon CV
             </ButtonLink>
             <ButtonLink href={profile.github} external>
               <GithubIcon /> GitHub
@@ -50,6 +53,19 @@ export function Hero() {
               <Mail className="size-4" /> Contact
             </ButtonLink>
           </div>
+          <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { value: "100 %", label: "JSON valide · 60/60 sorties" },
+              { value: "87 %", label: "Champs corrects sur CORD" },
+              { value: "6/6", label: "Rôles testés" },
+              { value: "~0,94", label: "Rappel · scans propres" },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-lg border border-border bg-surface/80 px-3 py-3">
+                <dd className="font-mono text-xl text-fg">{stat.value}</dd>
+                <dt className="mt-1 text-xs leading-relaxed text-muted">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
         </div>
 
         <div className="relative">
@@ -65,7 +81,7 @@ export function Hero() {
                 alt="Portrait de Mohamed Aymane Badia"
                 width={768}
                 height={1024}
-                className="h-auto w-full max-w-xs rounded-xl object-cover lg:w-1/2 lg:max-w-none"
+                className="h-auto w-full max-w-xs rounded-xl object-cover object-center ring-1 ring-border-strong lg:w-1/2 lg:max-w-none"
               />
             </div>
           </div>

@@ -19,6 +19,7 @@
 
 # production
 /build
+/.private-assets/lama-dashboard.webp
 
 # misc
 .DS_Store
