@@ -5,6 +5,7 @@ import { ButtonLink } from "../ui/ButtonLink";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
 import { copy, localizedProfile, type Locale } from "@/data/i18n";
+import { ContactForm } from "../ContactForm";
 
 export function Contact({ locale }: { locale: Locale }) {
   const text = copy(locale);
@@ -43,7 +44,7 @@ export function Contact({ locale }: { locale: Locale }) {
           </div>
         </Reveal>
 
-        <Reveal delay={0.08}>
+        <Reveal delay={0.08} className="flex flex-col gap-6">
           <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
             {channels.map((c) => (
               <li key={c.label}>
@@ -64,6 +65,7 @@ export function Contact({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ul>
+          <ContactForm locale={locale} />
         </Reveal>
       </div>
     </Section>
