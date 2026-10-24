@@ -83,7 +83,7 @@ export const lamaHealthcare: FeaturedProject = {
   codePrivate: true,
   caseStudy: "/projects/lama-credentialing",
   results: [
-    { value: "100%", label: "Valid JSON · 60/60 sorties" },
+    { value: "100%", label: "JSON valide · 60/60 sorties" },
     { value: "87%", label: "Champs corrects · 124/143 · CORD" },
     { value: "3,3 Go", label: "Pic de VRAM du fine-tuning" },
     { value: "6 / 6", label: "Rôles validés par les tests d'accès" },

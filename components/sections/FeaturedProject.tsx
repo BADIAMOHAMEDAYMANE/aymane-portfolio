@@ -13,7 +13,7 @@ export function FeaturedProject({ project: p, locale }: { project: FeaturedProje
 
   return (
     <Reveal>
-      <article className="overflow-hidden rounded-2xl border border-border-strong bg-surface">
+      <article id={`project-${p.slug}`} className="overflow-hidden rounded-2xl border border-border-strong bg-surface">
         <header className="flex flex-col gap-6 border-b border-border p-6 sm:p-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="mb-3 inline-flex min-h-8 items-center rounded-full border border-border-strong px-3 font-mono text-xs uppercase tracking-wider text-subtle">

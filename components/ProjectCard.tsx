@@ -20,7 +20,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
   const remainingStack = stack.length - visibleStack.length;
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,box-shadow,transform] duration-300 hover:border-border-strong hover:shadow-lg motion-safe:hover:-translate-y-1">
+    <article id={`project-${project.slug}`} className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,box-shadow,transform] duration-300 hover:border-border-strong hover:shadow-lg motion-safe:hover:-translate-y-1">
       <div className="flex flex-1 flex-col p-6">
         <p className="mb-3 font-mono text-xs uppercase tracking-wider text-subtle">
           {categories.map((category) => categoryLabels[category] ?? category).join(" · ")}

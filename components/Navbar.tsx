@@ -37,6 +37,10 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
       .filter((section): section is Element => section !== null);
     const observer = new IntersectionObserver(
       (entries) => {
+        if (window.scrollY < Math.max(100, window.innerHeight * 0.45)) {
+          setActive("");
+          return;
+        }
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];

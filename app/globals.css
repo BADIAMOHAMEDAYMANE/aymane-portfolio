@@ -106,7 +106,7 @@ body {
 
 /* Scroll reveal (see components/ui/Reveal.tsx) */
 [data-reveal] {
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1), transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 [data-reveal="hidden"] {
   opacity: 0;

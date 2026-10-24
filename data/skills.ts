@@ -20,11 +20,24 @@ export const coreSkills = [
   "Streamlit",
   "Docker",
   "Next.js / TypeScript",
-];
+] as const;
+
+export const coreSkillProjectSlugs: Record<(typeof coreSkills)[number], string[]> = {
+  Python: ["trendradar", "image-captioning", "cifar10-cnn", "news-classification", "flight-tracker"],
+  PyTorch: ["image-captioning", "cifar10-cnn"],
+  "Transformers / LoRA (PEFT)": ["lama-healthcare"],
+  "Scikit-learn": ["trendradar", "news-classification"],
+  NLP: ["trendradar", "image-captioning", "news-classification"],
+  "Computer Vision": ["image-captioning", "cifar10-cnn"],
+  "Document AI": ["lama-healthcare"],
+  Streamlit: ["trendradar", "image-captioning", "cifar10-cnn"],
+  Docker: ["cifar10-cnn"],
+  "Next.js / TypeScript": ["lama-healthcare"],
+};
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: "Aussi utilisé · IA & Machine Learning",
+    title: "IA & Machine Learning",
     description: "Modélisation, entraînement et évaluation",
     items: [
       "TensorFlow / Keras",
@@ -37,7 +50,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Aussi utilisé · NLP & Données",
+    title: "NLP & Données",
     description: "Préparation, analyse et visualisation",
     items: [
       "spaCy",
@@ -51,7 +64,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Aussi utilisé · Développement",
+    title: "Développement",
     description: "Interfaces, APIs et intégration",
     items: [
       "React",
@@ -64,7 +77,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Aussi utilisé · Outils",
+    title: "Outils",
     description: "Environnement de travail",
     items: ["Git", "GitHub", "Vercel", "Kaggle", "Google Colab", "CUDA (entraînement GPU)", "Postman", "Jupyter"],
   },
