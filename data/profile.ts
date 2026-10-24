@@ -23,7 +23,7 @@ export const profile = {
   lookingFor: {
     duration: "6 mois",
     topics: ["LLM / NLP", "Computer Vision", "Document AI", "MLOps"],
-    start: "Février",
+    start: "février",
     mobility: "Présentiel ou à distance",
   },
   // Prefer the custom domain; Vercel's deployment hostname is a safe fallback.

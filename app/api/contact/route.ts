@@ -8,6 +8,7 @@ type ContactPayload = {
   email: string;
   subject: string;
   message: string;
+  website?: string;
 };
 
 function isContactPayload(value: unknown): value is ContactPayload {
@@ -17,7 +18,8 @@ function isContactPayload(value: unknown): value is ContactPayload {
     typeof payload.name === "string" &&
     typeof payload.email === "string" &&
     typeof payload.subject === "string" &&
-    typeof payload.message === "string"
+    typeof payload.message === "string" &&
+    (payload.website === undefined || typeof payload.website === "string")
   );
 }
 
@@ -36,6 +38,11 @@ export async function POST(request: Request) {
 
   if (!isContactPayload(payload)) {
     return Response.json({ error: "Please complete all fields." }, { status: 400 });
+  }
+
+  if (payload.website?.trim()) {
+    console.warn("Contact submission rejected by the honeypot.");
+    return Response.json({ error: "Invalid contact submission." }, { status: 400 });
   }
 
   const name = payload.name.trim();
