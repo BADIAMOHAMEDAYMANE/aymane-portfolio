@@ -6,10 +6,10 @@
 export const profile = {
   name: "Mohamed Aymane Badia",
   initials: "MAB",
-  role: "Élève-ingénieur IA & Data Science",
+  role: "Élève-ingénieur en 5e année · IA & Data Science · EMSI",
   tagline:
-    "LLM fine-tuning · Document AI · Deep Learning — de l'expérimentation à des applications utilisables.",
-  status: "Recherche un stage PFE de 6 mois en IA / Machine Learning / Data Science",
+    "Je construis des projets d'IA de bout en bout, de la préparation des données à leur intégration dans des applications.",
+  status: "Recherche un stage PFE de 6 mois · IA / Machine Learning / Data Science · dès février",
   location: "Marrakech, Maroc",
   languages: [
     { name: "Français", level: "B2" },

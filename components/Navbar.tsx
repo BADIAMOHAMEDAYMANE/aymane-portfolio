@@ -105,7 +105,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             href={locale === "en" ? "/cv-en.pdf" : profile.resume}
             download={text.cvFile}
             aria-label={text.cv}
-            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-sm text-accent transition-colors hover:bg-accent-soft hover:text-fg sm:px-3"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md border border-control-border bg-surface px-2 text-sm text-fg transition-colors hover:border-accent hover:bg-accent-soft sm:px-3"
           >
             <FileDown className="size-4" aria-hidden="true" />
             <span className="hidden xl:inline">{text.cv}</span>
@@ -124,7 +124,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             target="_blank"
             rel="noopener noreferrer"
             aria-label={text.githubProfile}
-            className="grid size-11 shrink-0 place-items-center rounded-md text-muted transition-colors hover:bg-surface-2 hover:text-fg"
+            className="hidden size-11 shrink-0 place-items-center rounded-md text-muted transition-colors hover:bg-surface-2 hover:text-fg sm:grid"
           >
             <GithubIcon />
           </a>
