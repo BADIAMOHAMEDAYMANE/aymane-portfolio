@@ -31,8 +31,10 @@ const GH = "https://github.com/BADIAMOHAMEDAYMANE";
 
 export type FeaturedProject = Project & {
   label: string;
+  summary: { problem: string; approach: string; outcome: string };
   architecture: { step: string; detail: string }[];
   contributions: string[];
+  caseStudy?: string;
 };
 
 export const lamaHealthcare: FeaturedProject = {
@@ -42,8 +44,13 @@ export const lamaHealthcare: FeaturedProject = {
   context: "Lama Healthcare — Practice One · PFA (8 semaines) · équipe de 3",
   tagline:
     "Contribution à la reconstruction d'une plateforme de gestion des accréditations pour des cabinets médicaux américains, avec un pipeline IA d'analyse documentaire sous revue humaine.",
+  summary: {
+    problem: "Suivi des accréditations et saisie documentaire manuelle.",
+    approach: "Reconstruction de la plateforme et pipeline Document AI avec validation humaine.",
+    outcome: "Extraction évaluée sur CORD public ; revue humaine avant sauvegarde.",
+  },
   problem:
-    "Les professionnels doivent être accrédités auprès de chaque assureur, et les licences, certifications et attestations expirent. L'application existante avait 4 fonctionnalités sur 17 opérationnelles, une protection des données incomplète et des données de santé visibles dans les journaux. Les documents arrivent sous forme de scans ou de photos, et leur saisie manuelle est lente et source d'erreurs.",
+    "Les professionnels doivent être accrédités auprès de chaque assureur, et les licences, certifications et attestations expirent. Le suivi des échéances et la saisie manuelle d'informations depuis des scans ou des photos prennent du temps et peuvent entraîner des erreurs.",
   solution:
     "La plateforme a été reconstruite avec Next.js et Supabase, une isolation des données par cabinet, un workflow d'accréditation à 12 états appliqué par la base et une piste d'audit. Pour les documents, le pipeline extrait des champs structurés et leurs preuves OCR, les fait vérifier, puis impose une validation humaine avant toute sauvegarde.",
   architecture: [
@@ -74,6 +81,7 @@ export const lamaHealthcare: FeaturedProject = {
   ],
   categories: ["AI / ML", "Full-Stack"],
   codePrivate: true,
+  caseStudy: "/projects/lama-credentialing",
   results: [
     { value: "100%", label: "Valid JSON · 60/60 sorties" },
     { value: "87%", label: "Champs corrects · 124/143 · CORD" },
@@ -90,6 +98,11 @@ const trendRadar: FeaturedProject = {
   slug: "trendradar",
   title: "TrendRadar",
   tagline: "Détection de tendances en temps réel et prédiction de viralité sur les réseaux sociaux.",
+  summary: {
+    problem: "Repérer tôt les sujets émergents dans un flux bilingue et bruité.",
+    approach: "Pipeline NLP bilingue, détection de pics et estimation de viralité.",
+    outcome: "Tableau de bord Streamlit ; aucun résultat chiffré publié.",
+  },
   problem:
     "Repérer tôt les sujets émergents dans un flux bilingue et bruité est difficile : les comptes de mots-clés ignorent le contexte, et les tendances ne deviennent évidentes qu'après leur pic.",
   solution:
@@ -168,7 +181,7 @@ export const projects: Project[] = [
       { value: "45,4 %", label: "Précision Top-1" },
     ],
     resultContext:
-      "Évalué sur environ 42 000 articles tenus à l'écart, répartis entre 42 catégories qui se chevauchent. Les scores de baseline hasard et TF-IDF + régression logistique restent à mesurer ; les confusions attendues concernent notamment Arts et Arts & Culture.",
+      "Évalué sur environ 42 000 articles tenus à l'écart, répartis entre 42 catégories qui se chevauchent.",
     github: `${GH}/News-Classification-Project`,
   },
   {

@@ -34,7 +34,7 @@ export function Projects({ locale }: { locale: Locale }) {
           type="button"
           aria-pressed={activeFilter === null}
           onClick={() => setActiveFilter(null)}
-          className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${activeFilter === null ? "border-accent bg-accent-soft text-accent" : "border-border text-muted hover:border-border-strong hover:text-fg"}`}
+          className={`min-h-11 rounded-full border px-4 text-sm transition-colors ${activeFilter === null ? "border-accent bg-accent-soft text-accent" : "border-control-border text-muted hover:border-accent hover:text-fg"}`}
         >
           {text.projects.all}
         </button>
@@ -44,7 +44,7 @@ export function Projects({ locale }: { locale: Locale }) {
             type="button"
             aria-pressed={activeFilter === filter}
             onClick={() => setActiveFilter(filter)}
-            className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${activeFilter === filter ? "border-accent bg-accent-soft text-accent" : "border-border text-muted hover:border-border-strong hover:text-fg"}`}
+            className={`min-h-11 rounded-full border px-4 text-sm transition-colors ${activeFilter === filter ? "border-accent bg-accent-soft text-accent" : "border-control-border text-muted hover:border-accent hover:text-fg"}`}
           >
             {text.projects.categories[filter]}
           </button>
