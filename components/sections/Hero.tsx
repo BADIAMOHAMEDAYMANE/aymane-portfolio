@@ -14,7 +14,7 @@ export function Hero({ locale }: { locale: Locale }) {
     <section id="top" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="bg-grid pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
-        <div>
+        <div className="hero-enter">
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:hidden" />
@@ -70,7 +70,7 @@ export function Hero({ locale }: { locale: Locale }) {
           </dl>
         </div>
 
-        <div className="relative">
+        <div className="relative hero-enter hero-enter-delay">
           <div className="rounded-2xl border border-border bg-surface/60 p-6 backdrop-blur-sm">
             <div className="mb-4 hidden items-center justify-between font-mono text-[11px] text-subtle lg:flex">
               <span>model.forward(x)</span>

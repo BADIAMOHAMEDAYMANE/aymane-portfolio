@@ -18,7 +18,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
   };
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-colors duration-300 hover:border-border-strong">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,box-shadow,transform] duration-300 hover:border-border-strong hover:shadow-lg motion-safe:hover:-translate-y-1">
       {images && images.length > 0 && (
         <div className="grid grid-cols-3 gap-px border-b border-border bg-border">
           {images.slice(0, 3).map((img) => (

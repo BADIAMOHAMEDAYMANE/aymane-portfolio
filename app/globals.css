@@ -7,6 +7,7 @@
   --surface-2: #17171a;
   --border: #1f1f23;
   --border-strong: #2c2c32;
+  --control-border: #62626b;
   --fg: #ededed;
   --muted: #a1a1aa;
   --subtle: #92929a;
@@ -22,6 +23,7 @@
   --surface-2: #f4f4f3;
   --border: #e7e5e4;
   --border-strong: #d6d3d1;
+  --control-border: #898580;
   --fg: #18181b;
   --muted: #52525b;
   --subtle: #62626b;
@@ -37,6 +39,7 @@
   --color-surface-2: var(--surface-2);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+  --color-control-border: var(--control-border);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-subtle: var(--subtle);
@@ -91,6 +94,13 @@ body {
 .nn-node { animation: pulse-node 3.2s ease-in-out infinite; }
 .nn-edge-active { stroke-dasharray: 4 8; animation: flow 1.6s linear infinite; }
 
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-enter { animation: hero-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-enter-delay { animation-delay: 100ms; }
+
 /* Scroll reveal (see components/ui/Reveal.tsx) */
 [data-reveal] {
   transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -103,6 +113,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .nn-node, .nn-edge-active { animation: none; }
+  .hero-enter { animation: none; }
   [data-reveal] { transition: none; }
   [data-reveal="hidden"] { opacity: 1; transform: none; }
 }

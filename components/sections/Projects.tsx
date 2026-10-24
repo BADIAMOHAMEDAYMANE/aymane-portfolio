@@ -12,9 +12,9 @@ export function Projects({ locale }: { locale: Locale }) {
   const text = copy(locale);
   const featuredProjects = localizedFeatured(locale);
   const projects = localizedProjects(locale);
-  const [activeFilter, setActiveFilter] = useState<ProjectCategory | "Tous">("Tous");
-  const filters: (ProjectCategory | "Tous")[] = ["Tous", "NLP", "Deep Learning", "Full-Stack", "Computer Vision"];
-  const visibleProjects = projects.filter((project) => activeFilter === "Tous" || project.categories.includes(activeFilter));
+  const [activeFilter, setActiveFilter] = useState<ProjectCategory | null>(null);
+  const filters: ProjectCategory[] = ["AI / ML", "NLP", "Deep Learning", "Full-Stack", "Computer Vision"];
+  const visibleProjects = projects.filter((project) => activeFilter === null || project.categories.includes(activeFilter));
 
   return (
     <Section
@@ -30,6 +30,14 @@ export function Projects({ locale }: { locale: Locale }) {
         ))}
       </div>
       <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label={text.projects.filters}>
+        <button
+          type="button"
+          aria-pressed={activeFilter === null}
+          onClick={() => setActiveFilter(null)}
+          className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${activeFilter === null ? "border-accent bg-accent-soft text-accent" : "border-border text-muted hover:border-border-strong hover:text-fg"}`}
+        >
+          {text.projects.all}
+        </button>
         {filters.map((filter) => (
           <button
             key={filter}
@@ -38,7 +46,7 @@ export function Projects({ locale }: { locale: Locale }) {
             onClick={() => setActiveFilter(filter)}
             className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${activeFilter === filter ? "border-accent bg-accent-soft text-accent" : "border-border text-muted hover:border-border-strong hover:text-fg"}`}
           >
-            {filter === "Tous" ? text.projects.all : text.projects.categories[filter]}
+            {text.projects.categories[filter]}
           </button>
         ))}
       </div>

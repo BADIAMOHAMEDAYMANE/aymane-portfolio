@@ -5,8 +5,7 @@
 
 export const profile = {
   name: "Mohamed Aymane Badia",
-  shortName: "Aymane Badia",
-  initials: "AB",
+  initials: "MAB",
   role: "Élève-ingénieur IA & Data Science",
   tagline:
     "LLM fine-tuning · Document AI · Deep Learning — de l'expérimentation à des applications utilisables.",
