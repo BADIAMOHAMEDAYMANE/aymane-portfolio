@@ -1,9 +1,7 @@
 import { ImageResponse } from "next/og";
 import { profile } from "@/data/profile";
 
-export const alt = `${profile.name} — Élève-ingénieur IA & Data Science, recherche stage PFE`;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
 export async function GET(request: Request) {
   const isEnglish = new URL(request.url).searchParams.get("locale") === "en";

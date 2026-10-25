@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils";
 type Variant = "primary" | "secondary" | "ghost";
 
 const styles: Record<Variant, string> = {
-  primary: "bg-accent text-accent-fg hover:opacity-90",
-  secondary: "border border-border-strong bg-surface text-fg hover:border-subtle",
-  ghost: "text-muted hover:text-fg",
+  primary: "bg-accent text-accent-fg hover:brightness-95 active:brightness-90",
+  secondary: "border border-control-border bg-surface text-fg hover:border-accent hover:bg-accent-soft active:bg-surface-2",
+  ghost: "text-muted hover:bg-surface-2 hover:text-fg active:bg-surface",
 };
 
 type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -20,8 +20,8 @@ export function ButtonLink({ variant = "secondary", size = "md", external, class
       {...rest}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-[opacity,border-color,color] duration-200",
-        size === "md" ? "h-10 px-4 text-sm" : "h-8 px-3 text-[13px]",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg font-medium transition-[background-color,border-color,color,filter] duration-200",
+        size === "md" ? "px-4 text-sm" : "px-3 text-sm",
         styles[variant],
         className,
       )}

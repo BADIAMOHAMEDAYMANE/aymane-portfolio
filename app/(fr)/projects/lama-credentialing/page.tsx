@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { lamaHealthcare } from "@/data/projects";
 import { profile } from "@/data/profile";
 import { Tag } from "@/components/ui/Tag";
+import { ArchitectureDiagram } from "@/components/ui/ArchitectureDiagram";
 
 export const metadata: Metadata = {
   title: "Credentialing & Document AI · Étude de cas",
@@ -21,14 +22,6 @@ export const metadata: Metadata = {
   } : {}),
 };
 
-const architecture = [
-  ["Document", "Dépôt du document par le professionnel via un lien sécurisé"],
-  ["Extraction", "Modèle spécialisé : champs structurés et éléments de preuve OCR"],
-  ["Vérification", "Second contrôle automatisé des champs extraits"],
-  ["Validation humaine", "Relecture obligatoire avant toute sauvegarde"],
-  ["Traçabilité", "Accès contrôlé par cabinet et journal d'audit"],
-];
-
 export default function LamaCredentialingCaseStudy() {
   return (
     <main className="min-h-dvh bg-bg text-fg">
@@ -44,7 +37,7 @@ export default function LamaCredentialingCaseStudy() {
           <p className="font-mono text-xs uppercase tracking-widest text-accent">PFA · 8 semaines · Équipe de 3</p>
           <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">{lamaHealthcare.title}</h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
-            {lamaHealthcare.tagline} Cette expérience de projet de fin d’année (PFA) ne correspond pas au stage PFE de six mois recherché.
+            {lamaHealthcare.tagline}
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {lamaHealthcare.stack.map((technology) => <Tag key={technology}>{technology}</Tag>)}
@@ -62,12 +55,16 @@ export default function LamaCredentialingCaseStudy() {
 
           <section aria-labelledby="architecture">
             <h2 id="architecture" className="font-mono text-sm uppercase tracking-wider text-accent">Architecture du flux documentaire</h2>
-            <ol className="mt-5 grid gap-3 sm:grid-cols-5">
-              {architecture.map(([title, detail], index) => (
-                <li key={title} className="rounded-lg border border-border bg-surface p-4">
+            <ArchitectureDiagram
+              steps={lamaHealthcare.architecture}
+              label="Flux d'architecture de la plateforme de credentialing et d'extraction documentaire"
+            />
+            <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {lamaHealthcare.architecture.map(({ step, detail }, index) => (
+                <li key={step} className="rounded-lg border border-border bg-surface p-4">
                   <span className="font-mono text-xs text-accent">{String(index + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 text-sm font-semibold">{title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">{detail}</p>
+                  <h3 className="mt-3 text-sm font-semibold">{step}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{detail}</p>
                 </li>
               ))}
             </ol>
@@ -76,24 +73,19 @@ export default function LamaCredentialingCaseStudy() {
 
           <section aria-labelledby="evaluation">
             <h2 id="evaluation" className="font-mono text-sm uppercase tracking-wider text-accent">Méthodologie d’évaluation</h2>
-            <div className="mt-5 overflow-x-auto rounded-lg border border-border">
-              <table className="w-full min-w-[620px] text-left text-sm">
-                <thead className="bg-surface text-muted">
-                  <tr><th className="px-4 py-3 font-medium">Protocole</th><th className="px-4 py-3 font-medium">Mesure</th><th className="px-4 py-3 font-medium">Contexte</th></tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  <tr>
-                    <th scope="row" className="px-4 py-3 font-medium">Comparatif de 4 modèles vision-langage</th>
-                    <td className="px-4 py-3">~0,94 de rappel des champs</td>
-                    <td className="px-4 py-3 text-muted">Scans propres · 180 observations par modèle</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" className="px-4 py-3 font-medium">Fine-tuning Qwen3-1.7B + LoRA</th>
-                    <td className="px-4 py-3">100 % JSON valide (60/60) ; 87 % des champs corrects (124/143)</td>
-                    <td className="px-4 py-3 text-muted">Dataset public CORD · jamais de données patient réelles</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="mt-5 space-y-3">
+              {[
+                ["Comparatif de 4 modèles vision-langage", "~0,94 de rappel des champs", "Scans propres · 180 observations par modèle"],
+                ["Fine-tuning Qwen3-1.7B + LoRA", "100 % JSON valide (60/60) ; 87 % des champs corrects (124/143)", "Dataset public CORD · jamais de données patient réelles"],
+                ["Fine-tuning Qwen3-1.7B + LoRA", "3,3 Go de VRAM au pic", "GPU Tesla T4"],
+                ["Contrôles d'accès par rôle", "6 / 6 rôles validés", "Tests d'accès"],
+              ].map(([protocol, measure, context]) => (
+                <dl key={protocol + measure} className="grid gap-2 rounded-lg border border-border bg-surface p-4 sm:grid-cols-3 sm:gap-4">
+                  <div><dt className="font-mono text-xs uppercase tracking-wider text-subtle">Protocole</dt><dd className="mt-1 text-sm leading-relaxed text-fg">{protocol}</dd></div>
+                  <div><dt className="font-mono text-xs uppercase tracking-wider text-subtle">Mesure</dt><dd className="mt-1 text-sm leading-relaxed text-fg">{measure}</dd></div>
+                  <div><dt className="font-mono text-xs uppercase tracking-wider text-subtle">Contexte</dt><dd className="mt-1 text-sm leading-relaxed text-muted">{context}</dd></div>
+                </dl>
+              ))}
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               Ces résultats proviennent de protocoles et de jeux d’évaluation différents : le rappel d’environ 0,94 concerne les scans propres du benchmark de modèles ; la proportion de champs corrects est mesurée sur CORD après fine-tuning. Ils ne sont pas directement comparables.

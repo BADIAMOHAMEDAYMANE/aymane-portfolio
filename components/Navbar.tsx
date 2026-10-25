@@ -37,6 +37,10 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
       .filter((section): section is Element => section !== null);
     const observer = new IntersectionObserver(
       (entries) => {
+        if (window.scrollY < Math.max(100, window.innerHeight * 0.45)) {
+          setActive("");
+          return;
+        }
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -49,10 +53,15 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   const toggleTheme = () => {
@@ -61,7 +70,9 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
     else delete document.documentElement.dataset.theme;
     try {
       localStorage.setItem("theme", next);
-    } catch {}
+    } catch (error) {
+      console.warn("Unable to save the theme preference.", error);
+    }
   };
 
   return (
@@ -73,10 +84,10 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5 sm:px-8" aria-label={text.navigation.main}>
         <a href="#top" className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-sm font-semibold tracking-tight text-fg">
-          <span className="grid size-7 place-items-center rounded-md border border-border-strong bg-surface font-mono text-[11px] text-accent">
+          <span aria-hidden="true" className="grid size-8 place-items-center rounded-md border border-border-strong bg-surface font-mono text-xs text-accent">
             {profile.initials}
           </span>
-          <span className="hidden sm:inline">{profile.shortName}</span>
+          <span className="hidden sm:inline">{profile.name}</span>
         </a>
 
         <ul className="hidden shrink-0 items-center gap-0.5 lg:flex">
@@ -85,7 +96,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
               <a
                 href={l.href}
                 aria-current={active === l.href ? "location" : undefined}
-                className={`whitespace-nowrap rounded-md px-2 py-2 text-[13px] transition-colors hover:text-fg ${active === l.href ? "text-accent" : "text-muted"}`}
+                className={`flex min-h-11 items-center whitespace-nowrap rounded-md px-2 text-sm transition-colors hover:text-fg ${active === l.href ? "text-accent" : "text-muted"}`}
               >
                 {text.navigation[l.key]}
               </a>
@@ -98,7 +109,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             href={locale === "en" ? "/cv-en.pdf" : profile.resume}
             download={text.cvFile}
             aria-label={text.cv}
-            className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-sm text-accent transition-colors hover:bg-accent-soft hover:text-fg sm:px-3"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md border border-control-border bg-surface px-2 text-sm text-fg transition-colors hover:border-accent hover:bg-accent-soft sm:px-3"
           >
             <FileDown className="size-4" aria-hidden="true" />
             <span className="hidden xl:inline">{text.cv}</span>
@@ -108,7 +119,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             href={languageHref}
             lang={locale === "en" ? "fr" : "en"}
             aria-label={text.switchTo}
-            className="grid h-9 min-w-9 shrink-0 place-items-center rounded-md px-2 font-mono text-xs font-semibold text-accent transition-colors hover:bg-accent-soft hover:text-fg"
+            className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-md px-2 font-mono text-xs font-semibold text-accent transition-colors hover:bg-accent-soft hover:text-fg"
           >
             {locale === "en" ? "FR" : "EN"}
           </a>
@@ -117,7 +128,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             target="_blank"
             rel="noopener noreferrer"
             aria-label={text.githubProfile}
-            className="grid size-9 shrink-0 place-items-center rounded-md text-muted transition-colors hover:text-fg"
+            className="hidden size-11 shrink-0 place-items-center rounded-md text-muted transition-colors hover:bg-surface-2 hover:text-fg sm:grid"
           >
             <GithubIcon />
           </a>
@@ -125,7 +136,7 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             type="button"
             onClick={toggleTheme}
             aria-label={`${locale === "en" ? "Switch to" : "Passer au thème"} ${theme === "dark" ? text.themeLight : text.themeDark}`}
-            className="grid size-9 shrink-0 place-items-center rounded-md text-muted transition-colors hover:text-fg"
+            className="grid size-11 shrink-0 place-items-center rounded-md text-muted transition-colors hover:bg-surface-2 hover:text-fg"
           >
             {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </button>
@@ -134,8 +145,8 @@ export function Navbar({ locale, languageHref }: { locale: Locale; languageHref:
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? text.closeMenu : text.openMenu}
             aria-expanded={open}
-            aria-controls="mobile-menu"
-            className="grid size-9 shrink-0 place-items-center rounded-md text-fg lg:hidden"
+            aria-controls={open ? "mobile-menu" : undefined}
+            className="grid size-11 shrink-0 place-items-center rounded-md text-fg lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>

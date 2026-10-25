@@ -17,7 +17,7 @@ export function Section({ id, index, eyebrow, title, intro, className, children 
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
           <header className="mb-9 max-w-2xl">
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-subtle">
               {index && <span className="text-subtle">{index} / </span>}
               {eyebrow}
             </p>

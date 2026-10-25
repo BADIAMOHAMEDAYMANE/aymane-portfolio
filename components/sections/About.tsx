@@ -8,27 +8,29 @@ export function About({ locale }: { locale: Locale }) {
   const localized = localizedProfile(locale);
   return (
     <Section id="about" index="01" eyebrow={text.about.eyebrow} title={text.about.title}>
-      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-        <Reveal className="space-y-5 text-[15px] leading-relaxed text-muted sm:text-base">
-          {text.about.paragraphs.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </Reveal>
-        {profile.languages.length > 0 && (
-          <Reveal delay={0.1} className="mt-8">
-            <h3 className="mb-3 font-mono text-xs uppercase tracking-wider text-accent">{text.about.languages}</h3>
-            <ul className="flex flex-wrap gap-2">
-              {profile.languages.map((language) => (
-                <li key={language.name} className="rounded-md border border-border bg-surface px-3 py-2 text-sm text-fg">
-                  {locale === "en"
-                    ? language.name === "Français" ? "French" : "English"
-                    : language.name}
-                  <span className="text-muted">· {language.level}</span>
-                </li>
-              ))}
-            </ul>
+      <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+        <div className="space-y-8">
+          <Reveal className="space-y-5 text-[15px] leading-relaxed text-muted sm:text-base">
+            {text.about.paragraphs.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </Reveal>
-        )}
+          {profile.languages.length > 0 && (
+            <Reveal delay={0.1}>
+              <h3 className="mb-3 font-mono text-xs uppercase tracking-wider text-accent">{text.about.languages}</h3>
+              <ul className="flex flex-wrap gap-2">
+                {profile.languages.map((language) => (
+                  <li key={language.name} className="rounded-md border border-border bg-surface px-3 py-2 text-sm text-fg">
+                    {locale === "en"
+                      ? language.name === "Français" ? "French" : "English"
+                      : language.name}
+                    <span className="text-muted">· {language.level}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          )}
+        </div>
         <Reveal delay={0.1}>
           <dl className="divide-y divide-border rounded-xl border border-border bg-surface">
             {text.about.highlights.map((h) => (
