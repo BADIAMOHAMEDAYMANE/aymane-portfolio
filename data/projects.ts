@@ -169,19 +169,20 @@ export const projects: Project[] = [
   {
     slug: "news-classification",
     title: "Classification de catégories d'actualités",
-    tagline: "BiLSTM classant des articles parmi 42 catégories.",
+    tagline: "BiLSTM comparé à une baseline TF-IDF + SVM sur 42 catégories déséquilibrées.",
     problem:
       "Orienter automatiquement des articles parmi 42 catégories qui se chevauchent (par exemple Arts et Arts & Culture).",
     solution:
-      "Pipeline NLP (nettoyage, mots vides, tokenisation, padding) alimentant un réseau Embedding + BiLSTM, avec équilibrage des classes, arrêt anticipé et ajustement du taux d'apprentissage. Évaluation sur environ 42 000 articles mis de côté.",
-    stack: ["TensorFlow / Keras", "BiLSTM", "NLTK", "Scikit-learn", "Pandas"],
+      "Pipeline NLP (nettoyage, mots vides, tokenisation, padding) alimentant un réseau Embedding + BiLSTM avec pondération adoucie des classes et arrêt anticipé, comparé à une baseline TF-IDF (unigrammes et bigrammes) + SVM linéaire sur le même découpage.",
+    stack: ["TensorFlow / Keras", "BiLSTM", "TF-IDF", "LinearSVC", "NLTK", "Scikit-learn"],
     categories: ["NLP", "Deep Learning"],
     results: [
-      { value: "69,0 %", label: "Exactitude top-3 · 42 classes" },
-      { value: "45,4 %", label: "Exactitude top-1" },
+      { value: "63,5 %", label: "Exactitude top-1 · TF-IDF + SVM" },
+      { value: "83,3 %", label: "Exactitude top-3 · TF-IDF + SVM" },
+      { value: "55,4 %", label: "Exactitude top-1 · BiLSTM" },
     ],
     resultContext:
-      "Évalué sur environ 42 000 articles tenus à l'écart, répartis entre 42 catégories qui se chevauchent.",
+      "Évalué sur 41 889 articles tenus à l'écart (42 catégories). Une pondération entièrement équilibrée faisait chuter le rappel de POLITICS à 6 % (36,7 % d'exactitude) ; l'adoucir l'a ramené à 70 %.",
     github: `${GH}/News-Classification-Project`,
   },
   {

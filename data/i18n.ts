@@ -456,11 +456,11 @@ const projectEnglish: Record<string, Partial<Project>> = {
   },
   "news-classification": {
     title: "News category classification",
-    tagline: "BiLSTM classifying articles into 42 categories.",
+    tagline: "BiLSTM compared with a TF-IDF + SVM baseline on 42 imbalanced categories.",
     problem: "Automatically route articles into 42 overlapping categories (for example, Arts and Arts & Culture).",
-    solution: "An NLP pipeline (cleaning, stop words, tokenization, padding) feeding an Embedding + BiLSTM network, with class balancing, early stopping and learning-rate scheduling. Evaluated on approximately 42,000 held-out articles.",
-    results: [{ value: "69.0%", label: "Top-3 accuracy · 42 classes" }, { value: "45.4%", label: "Top-1 accuracy" }],
-    resultContext: "Evaluated on approximately 42,000 held-out articles across 42 overlapping categories.",
+    solution: "An NLP pipeline (cleaning, stop words, tokenization, padding) feeding an Embedding + BiLSTM network with softened class weights and early stopping, compared with a TF-IDF (unigrams and bigrams) + linear SVM baseline on the same split.",
+    results: [{ value: "63.5%", label: "Top-1 accuracy · TF-IDF + SVM" }, { value: "83.3%", label: "Top-3 accuracy · TF-IDF + SVM" }, { value: "55.4%", label: "Top-1 accuracy · BiLSTM" }],
+    resultContext: "Evaluated on 41,889 held-out articles (42 categories). Fully balanced class weights dropped POLITICS recall to 6% (36.7% accuracy); softening them brought it back to 70%.",
   },
   "flight-tracker": {
     title: "Real-time flight tracker & AI travel assistant",
