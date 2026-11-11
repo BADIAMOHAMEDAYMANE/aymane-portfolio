@@ -12,8 +12,9 @@ export const profile = {
   status: "Recherche un stage PFE de 6 mois · IA / Machine Learning / Data Science · dès février",
   location: "Marrakech, Maroc",
   languages: [
-    { name: "Français", level: "B2" },
-    { name: "Anglais", level: "B1" },
+    { name: "Arabe", level: "Langue maternelle" },
+    { name: "Français", level: "Bilingue" },
+    { name: "Anglais", level: "B2" },
   ],
   email: "badiamohamedaymane@gmail.com",
   github: "https://github.com/BADIAMOHAMEDAYMANE",
@@ -33,14 +34,14 @@ export const profile = {
 export const about = {
   paragraphs: [
     "Je suis élève-ingénieur en 5e année d'Intelligence Artificielle & Data Science à l'EMSI, avec un intérêt particulier pour le Machine Learning, le Deep Learning et le NLP.",
-    "Dans le cadre de mon projet de fin d'année (PFA, 8 semaines) chez Lama Healthcare, j'ai contribué à reconstruire une plateforme de credentialing et mené des expérimentations d'extraction documentaire, dont un fine-tuning LoRA. Ce PFA est distinct du stage PFE de 6 mois que je recherche.",
+    "Dans le cadre de mon projet de fin d'année (PFA, juillet – septembre 2026) chez Lama Healthcare, j'ai contribué à reconstruire une plateforme de credentialing et mené des expérimentations d'extraction documentaire, dont un fine-tuning LoRA. Ce PFA est distinct du stage PFE de 6 mois que je recherche.",
     "J'apprends en construisant. Mes projets vont au-delà du notebook : je travaille de la préparation des données à l'entraînement, l'évaluation et l'intégration dans une application — démo Streamlit, déploiement Docker ou application web.",
     "Je recherche un stage PFE de 6 mois en IA, Machine Learning ou Data Science, autour du NLP/LLM, de la Computer Vision, du Document AI ou du déploiement de modèles.",
   ],
   highlights: [
     { label: "Domaines", value: "ML · Deep Learning · NLP" },
     { label: "Approche", value: "Données → Modèle → Produit" },
-    { label: "Projet de fin d'année", value: "Lama Healthcare · PFA · 8 semaines" },
+    { label: "Projet de fin d'année", value: "Lama Healthcare · PFA · juil. – sept. 2026" },
     { label: "Formation", value: "5e année · IA & Data Science · EMSI" },
   ],
 };

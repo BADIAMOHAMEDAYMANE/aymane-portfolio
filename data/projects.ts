@@ -41,7 +41,7 @@ export const lamaHealthcare: FeaturedProject = {
   slug: "lama-healthcare",
   label: "Projet en entreprise · PFA",
   title: "Plateforme de credentialing et extraction documentaire par IA",
-  context: "Lama Healthcare — Practice One · PFA (8 semaines) · équipe de 3",
+  context: "Lama Healthcare — Practice One · PFA (juillet – septembre 2026) · équipe de 3",
   tagline:
     "Contribution à la reconstruction d'une plateforme de gestion des accréditations pour des cabinets médicaux américains, avec un pipeline IA d'analyse documentaire sous revue humaine.",
   summary: {
@@ -138,11 +138,11 @@ export const projects: Project[] = [
     problem:
       "Quelle architecture de décodeur produit les meilleures descriptions d'images ? Une comparaison équitable exige un encodeur, des données et une évaluation identiques.",
     solution:
-      "Un encodeur ResNet50 gelé alimente trois décodeurs — LSTM, attention de Bahdanau et Transformer — entraînés sur Flickr8k et comparés avec BLEU-1 à BLEU-4, beam search et visualisations d'attention.",
+      "Un encodeur ResNet50 gelé alimente trois décodeurs — LSTM, attention de Bahdanau et Transformer — partageant le même pipeline d'entraînement sur Flickr8k, d'évaluation BLEU-1 à BLEU-4, de beam search et de visualisation de l'attention. Le pipeline est vérifié de bout en bout ; l'entraînement complet sur Flickr8k reste à publier.",
     stack: ["PyTorch", "ResNet50", "LSTM", "Attention", "Transformer", "Streamlit"],
     categories: ["Deep Learning", "NLP"],
     results: [],
-    github: `${GH}/Image-Capitioning`,
+    github: `${GH}/Image-Captioning`,
     note: "Les scores BLEU-1 à BLEU-4 des trois décodeurs et les exemples de légendes ne sont pas publiés ici.",
   },
   {
@@ -151,11 +151,11 @@ export const projects: Project[] = [
     tagline: "Réseau convolutif entraîné sur GPU et exposé dans une démo web.",
     problem: "Classer des images parmi 10 catégories avec un modèle compact entraîné sur des images 32×32.",
     solution:
-      "CNN à 3 blocs (BatchNorm, Dropout, environ 500 000 paramètres), entraîné avec PyTorch sur GPU Tesla T4 et servi dans une application Streamlit conteneurisée acceptant une image importée.",
+      "CNN à 3 blocs (BatchNorm, Dropout, environ 500 000 paramètres), entraîné avec PyTorch sur GPU Tesla T4 et servi dans une application Streamlit conteneurisée (Docker Compose). Un filtre MobileNetV2 écarte les images hors domaine et les prédictions peu sûres (confiance < 0,80 ou entropie élevée) sont rejetées.",
     stack: ["PyTorch", "CUDA", "CNN", "Streamlit", "Docker"],
     categories: ["Deep Learning", "Computer Vision"],
     results: [
-      { value: "~78 %", label: "Précision sur le jeu de test" },
+      { value: "~78 %", label: "Exactitude (accuracy) sur le jeu de test" },
       { value: "~500 k", label: "Paramètres" },
     ],
     github: `${GH}/Animal-Classification`,
@@ -177,8 +177,8 @@ export const projects: Project[] = [
     stack: ["TensorFlow / Keras", "BiLSTM", "NLTK", "Scikit-learn", "Pandas"],
     categories: ["NLP", "Deep Learning"],
     results: [
-      { value: "69,0 %", label: "Précision Top-3 · 42 classes" },
-      { value: "45,4 %", label: "Précision Top-1" },
+      { value: "69,0 %", label: "Exactitude top-3 · 42 classes" },
+      { value: "45,4 %", label: "Exactitude top-1" },
     ],
     resultContext:
       "Évalué sur environ 42 000 articles tenus à l'écart, répartis entre 42 catégories qui se chevauchent.",
@@ -190,10 +190,45 @@ export const projects: Project[] = [
     tagline: "Application React avec données de vol et assistant conversationnel.",
     problem: "Les voyageurs ont besoin de consulter les départs et de trouver des idées de destinations au même endroit.",
     solution:
-      "Interface React connectée à l'API AviationStack pour les vols, et serveur Flask reliant un assistant conversationnel à Google Gemini avec prompt système dédié et historique par session.",
-    stack: ["React", "JavaScript", "Flask", "Gemini API", "REST APIs"],
+      "Interface React connectée à l'API AviationStack (recherche par numéro de vol ou compagnie, filtre par statut, tri et pagination), et serveur Flask reliant un assistant conversationnel à Google Gemini avec prompt système dédié et historique par session.",
+    stack: ["React", "JavaScript", "AviationStack API", "Flask", "Gemini API", "REST APIs"],
     categories: ["Full-Stack", "AI / ML"],
     results: [],
-    github: `${GH}/flight-management`,
+    github: `${GH}/Flight-Management`,
+  },
+  {
+    slug: "invoice-intelligence",
+    title: "Invoice Intelligence AI — extraction de factures (OCR + LLM)",
+    tagline: "OCR et petit LLM fine-tuné en LoRA pour transformer une facture en JSON structuré.",
+    problem:
+      "Saisir à la main les informations d'une facture ou d'un ticket (fournisseur, date, articles, montants) est lent et source d'erreurs, et l'OCR seul ne produit qu'un texte brut non structuré.",
+    solution:
+      "Photo ou PDF → OCR Tesseract (PyMuPDF pour les PDF) → Qwen2.5-0.5B-Instruct fine-tuné en LoRA (8,8 M de paramètres entraînables sur 503 M) → JSON structuré → réparation arithmétique et validation Pydantic → démo Streamlit.",
+    stack: ["Transformers", "PEFT / LoRA", "PyTorch", "Tesseract", "PyMuPDF", "Pydantic", "Streamlit", "pytest"],
+    categories: ["AI / ML", "NLP"],
+    results: [
+      { value: "0,99", label: "Exactitude par champ · test synthétique" },
+      { value: "0,54", label: "Modèle de base, sans fine-tuning" },
+    ],
+    resultContext:
+      "Mesuré sur 40 documents synthétiques tenus à l'écart. Sur de vrais tickets, la généralisation reste limitée : les tests réels sont documentés dans le dépôt.",
+    github: `${GH}/Invoice-Intelligence-ai`,
+  },
+  {
+    slug: "smart-traffic",
+    title: "Feux de circulation intelligents — Q-learning",
+    tagline: "Agent d'apprentissage par renforcement qui pilote les feux d'un carrefour simulé.",
+    problem:
+      "Des feux à durée fixe ne s'adaptent pas au trafic : les files d'attente s'allongent dès qu'un axe est plus chargé que l'autre.",
+    solution:
+      "Q-learning tabulaire implémenté de zéro : état = (file Nord-Sud, file Est-Ouest, phase du feu), 32 états, actions garder / changer, récompense = −(véhicules en attente), arrivées de Poisson, 1 000 épisodes, comparaison avec deux stratégies de référence et tableau de bord Streamlit.",
+    stack: ["Python", "NumPy", "Pandas", "Streamlit", "Docker"],
+    categories: ["AI / ML"],
+    results: [
+      { value: "−32,4 %", label: "File d'attente vs feux à durée fixe" },
+      { value: "−16,5 %", label: "File d'attente vs politique gloutonne" },
+    ],
+    resultContext: "Simulation : 1 000 épisodes de 100 pas, nombre moyen de véhicules en attente par pas.",
+    github: `${GH}/Road_Traffic_Management`,
   },
 ];

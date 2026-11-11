@@ -1,7 +1,7 @@
 /**
  * Experience & education.
- * Source: PFA defence slides (Soutenance PFA — EMSI, 2025–2026).
- * The dates and duration below reflect the available PFA defence material.
+ * Source: PFA defence slides (Soutenance PFA — EMSI, 4th year, 2025–2026).
+ * PFA internship: July – September 2026. Engineering cycle: 2022 – 2027 (5th year in 2026–2027).
  */
 
 export type Experience = {
@@ -19,8 +19,8 @@ export const experiences: Experience[] = [
   {
     company: "Lama Healthcare — Practice One",
     role: "Stage de projet de fin d'année (PFA) · Front-end & IA",
-    period: "2026 · 8 semaines",
-    location: null,
+    period: "Juillet – Septembre 2026",
+    location: "Las Vegas, Nevada, États-Unis",
     summary:
       "En équipe de trois, contribution à la reconstruction d'une plateforme de gestion des accréditations destinée à des cabinets médicaux américains et aux expérimentations d'extraction documentaire.",
     achievements: [
@@ -45,9 +45,9 @@ export const education: Education[] = [
   {
     degree: "Cycle ingénieur · Intelligence Artificielle & Data Science · 5e année",
     school: "EMSI — École Marocaine des Sciences de l'Ingénieur",
-    period: "Année universitaire 2025–2026",
+    period: "2022 – 2027 · 5e année en 2026–2027",
     details:
-      "Projet de fin d'année (PFA) de 8 semaines chez Lama Healthcare.",
+      "Projet de fin d'année (PFA) de 4e année chez Lama Healthcare, de juillet à septembre 2026.",
   },
 ];
 

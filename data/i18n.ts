@@ -49,7 +49,7 @@ const english = {
     title: "From experimentation to application.",
     paragraphs: [
       "I am a fifth-year engineering student in Artificial Intelligence & Data Science at EMSI, particularly interested in Machine Learning, Deep Learning and NLP.",
-      "As part of an 8-week end-of-year project (PFA) at Lama Healthcare, I contributed to rebuilding a credentialing platform and ran document-extraction experiments, including LoRA fine-tuning. This PFA is distinct from the 6-month final-year internship (PFE) I am seeking.",
+      "As part of my end-of-year project (PFA, July – September 2026) at Lama Healthcare, I contributed to rebuilding a credentialing platform and ran document-extraction experiments, including LoRA fine-tuning. This PFA is distinct from the 6-month final-year internship (PFE) I am seeking.",
       "I learn by building. My projects go beyond notebooks: I work from data preparation through training and evaluation to integration into an application — from Streamlit demos and Docker deployments to web apps.",
       "My interests include NLP/LLMs, Computer Vision, Document AI and model deployment.",
     ],
@@ -57,7 +57,7 @@ const english = {
     highlights: [
       { label: "Focus", value: "ML · Deep Learning · NLP" },
       { label: "Approach", value: "Data → Model → Product" },
-      { label: "End-of-year project", value: "Lama Healthcare · PFA · 8 weeks" },
+      { label: "End-of-year project", value: "Lama Healthcare · PFA · Jul – Sep 2026" },
       { label: "Education", value: "Year 5 · AI & Data Science · EMSI" },
     ],
     lookingFor: "What I’m looking for",
@@ -162,7 +162,7 @@ const english = {
   footer: "Built with Next.js · Tailwind CSS",
   caseStudy: {
     back: "Back to projects",
-    label: "PFA · 8 weeks · Team of 3",
+    label: "PFA · July – September 2026 · Team of 3",
     context: "Context & contribution",
     contributionText: "My contribution: front-end design and implementation, reusable components and portal interfaces; participation in document-extraction experiments and LoRA fine-tuning. Work completed as part of a three-person team.",
     architecture: "Document workflow architecture",
@@ -232,7 +232,7 @@ export function copy(locale: Locale) {
       title: "De l'expérimentation à l'application.",
       paragraphs: [
         "Je suis élève-ingénieur en 5e année d'Intelligence Artificielle & Data Science à l'EMSI, avec un intérêt particulier pour le Machine Learning, le Deep Learning et le NLP.",
-        "Dans le cadre de mon projet de fin d'année (PFA, 8 semaines) chez Lama Healthcare, j'ai contribué à reconstruire une plateforme de credentialing et mené des expérimentations d'extraction documentaire, dont un fine-tuning LoRA. Ce PFA est distinct du stage PFE de 6 mois que je recherche.",
+        "Dans le cadre de mon projet de fin d'année (PFA, juillet – septembre 2026) chez Lama Healthcare, j'ai contribué à reconstruire une plateforme de credentialing et mené des expérimentations d'extraction documentaire, dont un fine-tuning LoRA. Ce PFA est distinct du stage PFE de 6 mois que je recherche.",
         "J'apprends en construisant. Mes projets vont au-delà du notebook : je travaille de la préparation des données à l'entraînement, l'évaluation et l'intégration dans une application — démo Streamlit, déploiement Docker ou application web.",
         "Mes centres d'intérêt incluent le NLP/LLM, la Computer Vision, le Document AI et le déploiement de modèles.",
       ],
@@ -240,7 +240,7 @@ export function copy(locale: Locale) {
       highlights: [
         { label: "Domaines", value: "ML · Deep Learning · NLP" },
         { label: "Approche", value: "Données → Modèle → Produit" },
-        { label: "Projet de fin d'année", value: "Lama Healthcare · PFA · 8 semaines" },
+        { label: "Projet de fin d'année", value: "Lama Healthcare · PFA · juil. – sept. 2026" },
         { label: "Formation", value: "5e année · IA & Data Science · EMSI" },
       ],
       lookingFor: "Ce que je cherche",
@@ -332,7 +332,7 @@ export function copy(locale: Locale) {
     footer: "Réalisé avec Next.js · Tailwind CSS",
     caseStudy: {
       back: "Retour aux projets",
-      label: "PFA · 8 semaines · Équipe de 3",
+      label: "PFA · juillet – septembre 2026 · Équipe de 3",
       context: "Contexte & contribution",
       contributionText: "Contribution personnelle : conception et réalisation du front-end, composants réutilisables et interfaces du portail ; participation aux expérimentations d’extraction documentaire et au fine-tuning LoRA. Travail réalisé au sein d’une équipe de trois.",
       architecture: "Architecture du flux documentaire",
@@ -371,7 +371,7 @@ const featuredEnglish: Record<string, Partial<FeaturedProject>> = {
   "lama-healthcare": {
     label: "Industry project · PFA",
     title: "AI-powered credentialing platform and document extraction",
-    context: "Lama Healthcare — Practice One · PFA (8 weeks) · team of 3",
+    context: "Lama Healthcare — Practice One · PFA (July – September 2026) · team of 3",
     tagline: "Contributed to rebuilding a credentialing platform for US medical practices, with an AI document-analysis pipeline under human review.",
     summary: {
       problem: "Multiple credentialing requirements and manual document entry.",
@@ -439,14 +439,14 @@ const projectEnglish: Record<string, Partial<Project>> = {
     title: "Image captioning — CNN vs attention vs Transformer",
     tagline: "PyTorch system comparing three decoder architectures.",
     problem: "Which decoder architecture produces the best image descriptions? A fair comparison requires the same encoder, data and evaluation.",
-    solution: "A frozen ResNet50 encoder feeds three decoders — LSTM, Bahdanau attention and Transformer — trained on Flickr8k and compared with BLEU-1 to BLEU-4, beam search and attention visualizations.",
+    solution: "A frozen ResNet50 encoder feeds three decoders — LSTM, Bahdanau attention and Transformer — sharing the same Flickr8k training pipeline, BLEU-1 to BLEU-4 evaluation, beam search and attention visualizations. The pipeline is verified end to end; full Flickr8k training results are not published yet.",
     note: "BLEU-1 to BLEU-4 scores for the three decoders and sample captions have not been published here.",
   },
   "cifar10-cnn": {
     title: "CIFAR-10 image classification with a CNN",
     tagline: "GPU-trained convolutional network served in a web demo.",
     problem: "Classify images into 10 categories with a compact model trained on 32×32 images.",
-    solution: "A 3-block CNN (BatchNorm, Dropout, approximately 500,000 parameters), trained with PyTorch on a Tesla T4 GPU and served in a containerized Streamlit app that accepts image uploads.",
+    solution: "A 3-block CNN (BatchNorm, Dropout, approximately 500,000 parameters), trained with PyTorch on a Tesla T4 GPU and served in a containerized Streamlit app (Docker Compose). A MobileNetV2 filter rejects out-of-domain images, and uncertain predictions (confidence < 0.80 or high entropy) are rejected.",
     results: [{ value: "~78%", label: "Test-set accuracy" }, { value: "~500k", label: "Parameters" }],
     images: [
       { src: "/projects/cifar-plane.webp", alt: "Airplane class prediction in the Streamlit app" },
@@ -466,7 +466,23 @@ const projectEnglish: Record<string, Partial<Project>> = {
     title: "Real-time flight tracker & AI travel assistant",
     tagline: "React application with flight data and a conversational assistant.",
     problem: "Travelers need to check departures and discover destination ideas in one place.",
-    solution: "React interface connected to AviationStack for flight data, plus a Flask server connecting a conversational assistant to Google Gemini with a dedicated system prompt and per-session history.",
+    solution: "React interface connected to the AviationStack API (search by flight number or airline, status filter, sorting and pagination), plus a Flask server connecting a conversational assistant to Google Gemini with a dedicated system prompt and per-session history.",
+  },
+  "invoice-intelligence": {
+    title: "Invoice Intelligence AI — invoice extraction (OCR + LLM)",
+    tagline: "OCR plus a small LoRA-fine-tuned LLM that turns an invoice into structured JSON.",
+    problem: "Manually entering invoice or receipt details (vendor, date, line items, amounts) is slow and error-prone, and OCR alone only returns unstructured raw text.",
+    solution: "Photo or PDF → Tesseract OCR (PyMuPDF for PDFs) → Qwen2.5-0.5B-Instruct fine-tuned with LoRA (8.8M trainable parameters out of 503M) → structured JSON → arithmetic repair and Pydantic validation → Streamlit demo.",
+    results: [{ value: "0.99", label: "Field accuracy · synthetic test set" }, { value: "0.54", label: "Base model, no fine-tuning" }],
+    resultContext: "Measured on 40 held-out synthetic documents. Generalisation to real receipts is still limited; real-ticket tests are documented in the repository.",
+  },
+  "smart-traffic": {
+    title: "Smart traffic lights — Q-learning",
+    tagline: "Reinforcement-learning agent controlling the lights of a simulated intersection.",
+    problem: "Fixed-time traffic lights do not adapt to traffic: queues grow as soon as one road is busier than the other.",
+    solution: "Tabular Q-learning implemented from scratch: state = (north-south queue, east-west queue, light phase), 32 states, keep / switch actions, reward = −(waiting cars), Poisson arrivals, 1,000 episodes, comparison with two baseline strategies and a Streamlit dashboard.",
+    results: [{ value: "−32.4%", label: "Queue vs fixed-time lights" }, { value: "−16.5%", label: "Queue vs greedy policy" }],
+    resultContext: "Simulation: 1,000 episodes of 100 steps, average number of waiting cars per step.",
   },
 };
 
@@ -484,8 +500,8 @@ export function localizedProjects(locale: Locale): Project[] {
 
 const experienceEnglish: Omit<Experience, "company" | "stack" | "caseStudy"> = {
   role: "End-of-year project internship (PFA) · Front end & AI",
-  period: "2026 · 8 weeks",
-  location: null,
+  period: "July – September 2026",
+  location: "Las Vegas, Nevada, USA",
   summary: "As part of a three-person team, contributed to rebuilding a credentialing platform for US medical practices and ran document-extraction experiments.",
   achievements: [
     "Owned the front end: design system, reusable components and portal screens, including an interface redesign",
@@ -497,8 +513,8 @@ const experienceEnglish: Omit<Experience, "company" | "stack" | "caseStudy"> = {
 
 const educationEnglish: Omit<Education, "school"> = {
   degree: "Engineering program · Artificial Intelligence & Data Science · Year 5",
-  period: "Academic year 2025–2026",
-  details: "8-week end-of-year project (PFA) at Lama Healthcare.",
+  period: "2022 – 2027 · Year 5 in 2026–2027",
+  details: "Year-4 end-of-year project (PFA) at Lama Healthcare, July – September 2026.",
 };
 
 export function localizedExperience(locale: Locale): Experience[] {

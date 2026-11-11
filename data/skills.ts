@@ -23,15 +23,15 @@ export const coreSkills = [
 ] as const;
 
 export const coreSkillProjectSlugs: Record<(typeof coreSkills)[number], string[]> = {
-  Python: ["trendradar", "image-captioning", "cifar10-cnn", "news-classification", "flight-tracker"],
+  Python: ["trendradar", "invoice-intelligence", "image-captioning", "cifar10-cnn", "news-classification", "smart-traffic", "flight-tracker"],
   PyTorch: ["image-captioning", "cifar10-cnn"],
-  "Transformers / LoRA (PEFT)": ["lama-healthcare"],
+  "Transformers / LoRA (PEFT)": ["lama-healthcare", "invoice-intelligence"],
   "Scikit-learn": ["trendradar", "news-classification"],
-  NLP: ["trendradar", "image-captioning", "news-classification"],
+  NLP: ["trendradar", "invoice-intelligence", "image-captioning", "news-classification"],
   "Computer Vision": ["image-captioning", "cifar10-cnn"],
-  "Document AI": ["lama-healthcare"],
-  Streamlit: ["trendradar", "image-captioning", "cifar10-cnn"],
-  Docker: ["cifar10-cnn"],
+  "Document AI": ["lama-healthcare", "invoice-intelligence"],
+  Streamlit: ["trendradar", "invoice-intelligence", "image-captioning", "cifar10-cnn", "smart-traffic"],
+  Docker: ["cifar10-cnn", "smart-traffic"],
   "Next.js / TypeScript": ["lama-healthcare"],
 };
 

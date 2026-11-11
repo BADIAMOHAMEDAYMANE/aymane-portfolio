@@ -34,7 +34,7 @@ export default function LamaCredentialingCaseStudy() {
         </Link>
 
         <header className="mt-10 border-b border-border pb-10">
-          <p className="font-mono text-xs uppercase tracking-widest text-accent">PFA · 8 semaines · Équipe de 3</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-accent">PFA · juillet – septembre 2026 · Équipe de 3</p>
           <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">{lamaHealthcare.title}</h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
             {lamaHealthcare.tagline}

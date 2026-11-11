@@ -22,9 +22,13 @@ export function About({ locale }: { locale: Locale }) {
                 {profile.languages.map((language) => (
                   <li key={language.name} className="rounded-md border border-border bg-surface px-3 py-2 text-sm text-fg">
                     {locale === "en"
-                      ? language.name === "Français" ? "French" : "English"
+                      ? ({ Arabe: "Arabic", Français: "French", Anglais: "English" } as Record<string, string>)[language.name] ?? language.name
                       : language.name}
-                    <span className="text-muted">· {language.level}</span>
+                    <span className="text-muted">
+                      · {locale === "en"
+                        ? ({ "Langue maternelle": "Native", Bilingue: "Bilingual" } as Record<string, string>)[language.level] ?? language.level
+                        : language.level}
+                    </span>
                   </li>
                 ))}
               </ul>
